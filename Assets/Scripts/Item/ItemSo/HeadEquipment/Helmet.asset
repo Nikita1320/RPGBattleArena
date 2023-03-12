@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e687fd9ea519f54a91f4b07301ea9c2, type: 3}
+  m_Name: Helmet
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: fd6e4fc32c78509458fc45ea4a478ba8, type: 3}
+  description: Ancient Helmet
+  nameItem: Helmet
+  typeEquipment: 2
+  rareEquipment: 0
+  equipmentStat:
+  - typeValue: 0
+    typeStat: 1
+    value:
+    - 1
+    - 4
+    - 6
+    - 8
+    - 10
+  - typeValue: 0
+    typeStat: 6
+    value:
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+  - typeValue: 1
+    typeStat: 2
+    value:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  possiblePerks:
+  - {fileID: 11400000, guid: 19ba22c6859229d44b869eb73d352df5, type: 2}
+  - {fileID: 11400000, guid: 929aed5038be4c346a2f74c8c0d84412, type: 2}
+  - {fileID: 11400000, guid: f573b6471f7893a4eacabbde899aa1ec, type: 2}
