@@ -8,12 +8,9 @@ public delegate void ChangedAmmount();
 public class CharacterCard
 {
     [SerializeField] private CharacterCardData cardData;
-    [SerializeField] private int ammount;
-    private Removing removingEvent;
-    private ChangedAmmount changedAmmountEvent;
-
-    public Removing RemovingEvent { get { return removingEvent; } set { if (value != null) { removingEvent += value; } } }
-    public ChangedAmmount ChangedAmmountEvent { get { return changedAmmountEvent; } set { if (value != null) { changedAmmountEvent += value; } } }
+    [SerializeField] private int ammount = 1;
+    public Removing removingEvent;
+    public ChangedAmmount changedAmmountEvent;
     public CharacterCardData CardData => cardData;
     public int Ammount => ammount;
 
@@ -29,7 +26,7 @@ public class CharacterCard
     public void ChangeAmmount(int value)
     {
         ammount += value;
-        ChangedAmmountEvent?.Invoke();
+        changedAmmountEvent?.Invoke();
         if (ammount == 0)
         {
             removingEvent?.Invoke();

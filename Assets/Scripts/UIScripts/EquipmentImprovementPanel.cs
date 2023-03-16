@@ -28,12 +28,19 @@ public class EquipmentImprovementPanel : MonoBehaviour
             equipment.improvedPerkEvent += UpdateImageImprovementPerk;
             equipment.improvedStatsEvent += UpdateImageImprovementStats;
         }
+        else
+        {
+            for (int i = 0; i < stars.Count; i++)
+            {
+                stars[i].gameObject.SetActive(false);
+            }
+        }
     }
     private void UpdateImageImprovementStats()
     {
         for (int i = 0; i < stars.Count; i++)
         {
-            if (equipment.CurrentLevelStats >= i)
+            if (equipment.CurrentLevelStats > i)
             {
                 stars[i].gameObject.SetActive(true);
             }
@@ -47,7 +54,7 @@ public class EquipmentImprovementPanel : MonoBehaviour
     {
         for (int i = 0; i < stars.Count; i++)
         {
-            if (equipment.CurrentLevelPerk >= i)
+            if (equipment.CurrentLevelPerk > i)
             {
                 stars[i].sprite = improvedStar;
             }

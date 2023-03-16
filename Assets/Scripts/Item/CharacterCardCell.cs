@@ -13,14 +13,22 @@ public class CharacterCardCell : ItemCell
     public CharacterCard CharacterCard => characterCard;
     public void Init(CharacterCard characterCard)
     {
+        if (this.characterCard != null)
+        {
+            characterCard.changedAmmountEvent -= UpdateAmmount;
+        }
         this.characterCard = characterCard;
         itemImage.sprite = characterCard.CardData.SpriteItem;
         rareImage.color = rareCardColor[(int)characterCard.CardData.ForCharacter.Rarity];
         ammountText.text = characterCard.Ammount.ToString();
-        characterCard.ChangedAmmountEvent += UpdateAmmount;
+        characterCard.changedAmmountEvent += UpdateAmmount;
     }
     public void UpdateAmmount()
     {
         ammountText.text = characterCard.Ammount.ToString();
+    }
+    private void OnDestroy()
+    {
+        characterCard.changedAmmountEvent -= UpdateAmmount;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EquipmentDescription : MonoBehaviour
 {
+    [SerializeField] private EquipmentUpgradeMenu upgradeMenu;
     private Equipment equipment;
 
     [SerializeField] private Text nameEquipment;
@@ -31,17 +32,20 @@ public class EquipmentDescription : MonoBehaviour
             }
             equipment = _equipment;
 
-            nameEquipment.text = equipment.EquipmentData.NameItem;
+            if (equipment != null)
+            {
+                nameEquipment.text = equipment.EquipmentData.NameItem;
 
-            equipmentCell.gameObject.SetActive(true);
-            equipmentCell.Init(equipment);
+                equipmentCell.gameObject.SetActive(true);
+                equipmentCell.Init(equipment);
 
-            RenderPerkPanel();
-            RenderStatPanel();
+                RenderPerkPanel();
+                RenderStatPanel();
 
-            equipment.improvedPerkEvent += RenderPerkPanel;
+                equipment.improvedPerkEvent += RenderPerkPanel;
 
-            equipment.improvedPerkEvent += RenderStatPanel;
+                equipment.improvedPerkEvent += RenderStatPanel;
+            }
         }
     }
     private void RenderPerkPanel()
@@ -59,5 +63,13 @@ public class EquipmentDescription : MonoBehaviour
             statsPanel.gameObject.SetActive(true);
             statsPanel.Init(equipment,renderNextLevelStat);
         }
+    }
+    public void OpenUpgradePanel()
+    {
+        upgradeMenu.OpenUpgradePanel(equipment, TypeImpoveEquipment.Upgrade);
+    }
+    public void OpenImprovementPanel()
+    {
+        upgradeMenu.OpenUpgradePanel(equipment, TypeImpoveEquipment.Improve);
     }
 }

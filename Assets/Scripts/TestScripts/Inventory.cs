@@ -45,21 +45,21 @@ public class Inventory : MonoBehaviour
             equipments[i].InitializeWithParametrs();
         }
     }
-    public void AddItem(EquipmentData equipmentData)
+    public void AddItem(Equipment newEquipment)
     {
-        equipments.Add(new Equipment(equipmentData));
-        addedEquipmentEvent?.Invoke(equipments[equipments.Count]);
+        equipments.Add(newEquipment);
+        addedEquipmentEvent?.Invoke(newEquipment);
     }
-    public void AddItem(CharacterCardData characterCardData, int ammount)
+    public void AddItem(CharacterCard newCharacterCard)
     {
-        if (FindCard(characterCardData, out CharacterCard characterCard))
+        if (FindCard(newCharacterCard.CardData, out CharacterCard characterCard))
         {
-            characterCard.ChangeAmmount(ammount);
+            characterCard.ChangeAmmount(newCharacterCard.Ammount);
         }
         else
         {
-            cards.Add(new CharacterCard(characterCardData, ammount));
-            addedCardtEvent?.Invoke(cards[cards.Count]);
+            cards.Add(newCharacterCard);
+            addedCardtEvent?.Invoke(newCharacterCard);
         }
     }
     public bool FindCard(CharacterCardData characterCardData, out CharacterCard characterCard)

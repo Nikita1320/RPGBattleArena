@@ -33,7 +33,7 @@ public class EquipmentPerkPanel : MonoBehaviour
         {
             if (equipment.CurrentLevelPerk < equipment.MaxLevelPerkUpgrade)
             {
-                descriptionTextNextLevel.text = "Boost On Next Level: " + equipment.EquipmentPerk.Description(equipment.CurrentLevelPerk + 1);
+                descriptionText.text += "\nBoost On Next Level: " + equipment.EquipmentPerk.Description(equipment.CurrentLevelPerk + 1);
             }
         }
     }

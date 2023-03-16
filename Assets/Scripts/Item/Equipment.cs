@@ -81,20 +81,23 @@ public class Equipment
         if (statsUpgradeLevel <= maxLevelStatsUpgrade)
         {
             statsUpgradeLevel++;
-            for (int i = 0; i < equipmentData.EquipmentStat.Length; i++)
+            if (character != null)
             {
-                if (equipmentData.EquipmentStat[i].TypeValue == TypeValueStat.Value)
+                for (int i = 0; i < equipmentData.EquipmentStat.Length; i++)
                 {
-                    if (character.Stats.TryGetValue(equipmentData.EquipmentStat[i].TypeStat, out CharacterStat characterStat))
-                        characterStat.ValueUpgrade = 
-                        (equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel) - equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel - 1));
-                }
-                else
-                {
-                    if (character.Stats.TryGetValue(equipmentData.EquipmentStat[i].TypeStat, out CharacterStat characterStat))
+                    if (equipmentData.EquipmentStat[i].TypeValue == TypeValueStat.Value)
                     {
-                        characterStat.CoefficientUpgrade = 1 / (1 + equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel - 1) / 100);
-                        characterStat.CoefficientUpgrade = 1 + equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel) / 100;
+                        if (character.Stats.TryGetValue(equipmentData.EquipmentStat[i].TypeStat, out CharacterStat characterStat))
+                            characterStat.ValueUpgrade =
+                            (equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel) - equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel - 1));
+                    }
+                    else
+                    {
+                        if (character.Stats.TryGetValue(equipmentData.EquipmentStat[i].TypeStat, out CharacterStat characterStat))
+                        {
+                            characterStat.CoefficientUpgrade = 1 / (1 + equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel - 1) / 100);
+                            characterStat.CoefficientUpgrade = 1 + equipmentData.EquipmentStat[i].GetValue(statsUpgradeLevel) / 100;
+                        }
                     }
                 }
             }

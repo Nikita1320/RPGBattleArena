@@ -10,14 +10,11 @@ public class CharacterCardDescription : MonoBehaviour
     [SerializeField] private Text nameText;
     [SerializeField] private Text intendedCharacterName;
     [SerializeField] private Image intendedCharacterImage;
-    [SerializeField] private GameObject descriptionPanel;
 
     public void Init(CharacterCard _characterCard)
     {
         if (characterCard != _characterCard)
         {
-            descriptionPanel.SetActive(true);
-
             characterCard = _characterCard;
 
             cardCell.gameObject.SetActive(true);

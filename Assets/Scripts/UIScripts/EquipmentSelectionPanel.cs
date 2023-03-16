@@ -81,6 +81,7 @@ public class EquipmentSelectionPanel : MonoBehaviour
 
             OpenDescriptionCurrentEquipment(typeEquipment);
         }
+        selectedEquipmentDescription.gameObject.SetActive(false);
         currentTypeSelectedEquipment = typeEquipment;
     }
     private void AddEquipmentCell(Equipment equipment)
@@ -210,5 +211,4 @@ public class EquipmentSelectionPanel : MonoBehaviour
         character.RemoveEquipment(removedEquipment);
         clothedEquipment = null;
     }
-
 }

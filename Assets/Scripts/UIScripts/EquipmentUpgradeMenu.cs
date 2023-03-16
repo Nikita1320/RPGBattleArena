@@ -41,6 +41,8 @@ public class EquipmentUpgradeMenu : MonoBehaviour
 
     private void Init()
     {
+        inventory = Inventory.Instance;
+        //Подписка на добавление/удаление ячеек(возможно не нужно)
         cellsWithLevel.Add(0, equipmentCellsFirstLevel);
         cellsWithLevel.Add(1, equipmentCellsSecondLevel);
         cellsWithLevel.Add(2, equipmentCellsThirdLevel);
@@ -89,6 +91,7 @@ public class EquipmentUpgradeMenu : MonoBehaviour
             applyImproveButton.interactable = false;
         }
         InstantiateCells();
+        this.gameObject.SetActive(true);
     }
 
     public void InstantiateCells()
@@ -102,6 +105,7 @@ public class EquipmentUpgradeMenu : MonoBehaviour
         else
         {
             equipments = inventory.GetEquipments(impovingEquipment.EquipmentData.EquipmentType, impovingEquipment.EquipmentData.Rare, impovingEquipment);
+            Debug.Log(equipments.Length);
         }
 
         for (int i = 0; i < equipments.Length; i++)
@@ -143,7 +147,40 @@ public class EquipmentUpgradeMenu : MonoBehaviour
     {
         foreach (var item in cellsWithLevel[targetLevel])
         {
+            if (item.Equipment == null)
+            {
+                return;
+            }
+        }
 
+        foreach (var item in cellsWithLevel[targetLevel])
+        {
+            inventory.RemoveEquipment(item.Equipment);
+        }
+
+        ResetSelectionCells(cellsWithLevel[targetLevel]);
+
+        panelWithLevel[targetLevel].SetActive(false);
+
+        if (currentTypeImprove == TypeImpoveEquipment.Improve)
+        {
+            impovingEquipment.UpgradePerk();
+        }
+        else
+        {
+            impovingEquipment.UpgradeStats();
+        }
+
+        targetLevel++;
+
+        if (targetLevel < impovingEquipment.MaxLevelPerkUpgrade)
+        {
+            panelWithLevel[targetLevel].SetActive(true);
+            ResetSelectionCells(cellsWithLevel[targetLevel]);
+        }
+        else
+        {
+            applyImproveButton.interactable = false;
         }
     }
 
@@ -179,10 +216,17 @@ public class EquipmentUpgradeMenu : MonoBehaviour
 
     public void ResetMenu()
     {
-        currentOpenPanel.SetActive(false);
+        if (currentOpenPanel != null)
+        {
+            currentOpenPanel.SetActive(false);
+        }
 
         ClearEquipmentsPanel();
 
         equipmentsList.Clear();
+
+        equipmentDescription.Init(null);
+
+        targetLevel = 0;
     }
 }
