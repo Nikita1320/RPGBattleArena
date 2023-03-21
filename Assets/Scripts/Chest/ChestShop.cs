@@ -6,9 +6,10 @@ public class ChestShop : MonoBehaviour
 {
     [SerializeField] private Chest[] chest;
     [SerializeField] private Chest selectedChest;
+    [SerializeField] private ChestDescription chestDescription;
 
-    [SerializeField] private EquipmentCell equipmentCellPrefab;
-    [SerializeField] private CharacterCardCell cardCellPrefab;
+    [SerializeField] private EquipmentRewardCell equipmentCellPrefab;
+    [SerializeField] private CharacterCardRewardCell cardCellPrefab;
     [SerializeField] private GameObject rewardPanel;
     [SerializeField] private GameObject rewardsConteiner;
 
@@ -16,7 +17,7 @@ public class ChestShop : MonoBehaviour
     [SerializeField] private GameObject chestModel;
     [SerializeField] private Animator animator;
 
-    private List<ItemCell> rewardCells = new();
+    private List<GameObject> rewardCells = new();
     private Inventory inventory;
     private void Start()
     {
@@ -24,6 +25,10 @@ public class ChestShop : MonoBehaviour
     }
     public void OpenChest(int ammountChestOpen)
     {
+        if (selectedChest == null)
+        {
+            return;
+        }
         rewardPanel.SetActive(true);
         selectedChest.GetRewards(ammountChestOpen, out List<Equipment> equipmentsRewards, out List<CharacterCard> characterCardRewards);
 
@@ -32,14 +37,14 @@ public class ChestShop : MonoBehaviour
         foreach (var item in equipmentsRewards)
         {
             var cell = Instantiate(equipmentCellPrefab, rewardsConteiner.transform);
-            rewardCells.Add(cell);
-            cell.Init(item);
+            rewardCells.Add(cell.gameObject);
+            cell.Init(item.EquipmentData);
         }
         foreach (var item in characterCardRewards)
         {
             var cell = Instantiate(cardCellPrefab, rewardsConteiner.transform);
-            rewardCells.Add(cell);
-            cell.Init(item);
+            rewardCells.Add(cell.gameObject);
+            cell.Init(item.CardData);
         }
 
         foreach (var item in equipmentsRewards)
@@ -67,9 +72,10 @@ public class ChestShop : MonoBehaviour
             Destroy(chestModel);
         }
         this.selectedChest = selectedChest;
-        chestModel = Instantiate(this.selectedChest.PrefabChest, pointSpawnChest);
+        chestModel = Instantiate(this.selectedChest.ChestData.ChestPrefab, pointSpawnChest);
         animator = chestModel.GetComponent<Animator>();
-        //Description
+        chestDescription.gameObject.SetActive(true);
+        chestDescription.Init(selectedChest);
     }
     public void OpenChestAnimation()
     {

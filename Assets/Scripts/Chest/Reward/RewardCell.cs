@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RewardCell : MonoBehaviour
+public abstract class RewardCell<T> : MonoBehaviour
 {
-    [SerializeField] private Image rewardImage;
+    [SerializeField] protected Image rewardImage;
+    public abstract void Init(T rewardObject);
 }

@@ -43,6 +43,7 @@ public class Character
     [SerializeField] private int rankCharacter;
     [SerializeField] private int currentAmountRankPoint;
     [SerializeField] private bool isOpen;
+    [SerializeField] private AbilityTree abilityTree;
     private Dictionary<TypeEquipment, Equipment> characterEquipments = new()
     {
         { TypeEquipment.Hand, null },
@@ -52,6 +53,7 @@ public class Character
     };
     private Dictionary<TypeStat, CharacterStat> characterStats = new();
 
+    public AbilityTree AbilityTree => abilityTree;
     public Dictionary<TypeStat, CharacterStat> Stats => characterStats;
     public Dictionary<TypeEquipment, Equipment> Equipments => characterEquipments;
     public CharacterData CharacterData => characterData;
@@ -81,6 +83,7 @@ public class Character
         {
             characterStats.Add(stats[i].TypeStat, new CharacterStat(this, stats[i]));
         }
+        abilityTree = new(this);
     }
     public void Equip(Equipment equipment)
     {

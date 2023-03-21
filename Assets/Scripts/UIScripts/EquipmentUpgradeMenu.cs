@@ -145,6 +145,13 @@ public class EquipmentUpgradeMenu : MonoBehaviour
 
     public void ApplyUpgrade()
     {
+        if (currentTypeImprove == TypeImpoveEquipment.Improve)
+        {
+            if (impovingEquipment.CurrentLevelPerk == impovingEquipment.CurrentLevelStats)
+            {
+                return;
+            }
+        }
         foreach (var item in cellsWithLevel[targetLevel])
         {
             if (item.Equipment == null)
@@ -175,7 +182,8 @@ public class EquipmentUpgradeMenu : MonoBehaviour
 
         if (targetLevel < impovingEquipment.MaxLevelPerkUpgrade)
         {
-            panelWithLevel[targetLevel].SetActive(true);
+            currentOpenPanel = panelWithLevel[targetLevel];
+            currentOpenPanel.SetActive(true);
             ResetSelectionCells(cellsWithLevel[targetLevel]);
         }
         else

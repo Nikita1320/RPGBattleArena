@@ -46,19 +46,11 @@ public class UpgradeCharacterPanel : MonoBehaviour
 
         if (neededCardToUpgradeCharacterRank == null)
         {
-            characterCardCell.ItemImage.sprite = neededCard.SpriteItem;
-            characterCardCell.AmmountText.text = "0";
-            characterCardCell.RareImage.color = neededCard.ForCharacter.RarityColor;
-            upAmmountButton.interactable = false;
-            downAmmountButton.interactable = false;
+            SetEmptySlot(neededCard);
         }
         else
         {
-            characterCardCell.Init(neededCardToUpgradeCharacterRank);
-            if (neededCardToUpgradeCharacterRank.Ammount > 0)
-            {
-                upAmmountButton.interactable = true;
-            }
+            SetCharacterCardToCell();
         }
 
         UpdateRank();
@@ -143,6 +135,10 @@ public class UpgradeCharacterPanel : MonoBehaviour
             currentAmmountCardSelected = 0;
 
             UpdateProgressRankImageWithPossibleUpgrade();
+            if (neededCardToUpgradeCharacterRank.Ammount == 0)
+            {
+                inventory.RemoveCardItem(neededCardToUpgradeCharacterRank);
+            }
         }
     }
     private void UpdateProgressRankImageWithPossibleUpgrade()
@@ -170,5 +166,22 @@ public class UpgradeCharacterPanel : MonoBehaviour
             characterCardCell.AmmountText.text = neededCardToUpgradeCharacterRank.Ammount.ToString();
         }
         upgradeImage.gameObject.SetActive(false);
+    }
+    private void SetEmptySlot(CharacterCardData cardData)
+    {
+        characterCardCell.ItemImage.sprite = cardData.SpriteItem;
+        characterCardCell.AmmountText.text = "0";
+        characterCardCell.RareImage.color = cardData.ForCharacter.RarityColor;
+        upAmmountButton.interactable = false;
+        downAmmountButton.interactable = false;
+    }
+    private void SetCharacterCardToCell()
+    {
+        characterCardCell.Init(neededCardToUpgradeCharacterRank);
+        if (neededCardToUpgradeCharacterRank.Ammount > 0)
+        {
+            upAmmountButton.interactable = true;
+            downAmmountButton.interactable = false;
+        }
     }
 }

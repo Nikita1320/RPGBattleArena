@@ -211,4 +211,8 @@ public class EquipmentSelectionPanel : MonoBehaviour
         character.RemoveEquipment(removedEquipment);
         clothedEquipment = null;
     }
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -64,4 +64,12 @@ public class EquipmentImprovementPanel : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        if (equipment != null)
+        {
+            equipment.improvedPerkEvent -= UpdateImageImprovementPerk;
+            equipment.improvedStatsEvent -= UpdateImageImprovementStats;
+        }
+    }
 }

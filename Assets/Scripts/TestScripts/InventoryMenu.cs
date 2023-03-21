@@ -79,7 +79,7 @@ public class InventoryMenu : MonoBehaviour
 
         characterCardCells[characterCardCells.Count - 1].CellButton.onClick.AddListener(() => descriptionPanel.RenderDescription(characterCard));
 
-        characterCardCells[characterCardCells.Count - 1].CharacterCard.removingEvent += () => RemoveCardCell(characterCardCells[characterCardCells.Count]);
+        characterCardCells[characterCardCells.Count - 1].CharacterCard.removingEvent += () => RemoveCardCell(characterCardCells[characterCardCells.Count - 1]);
     }
     public void RemoveEquipmentCell(EquipmentCell equipmentCell)
     {

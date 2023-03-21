@@ -9,9 +9,15 @@ public class CharacterInformationPanel : MonoBehaviour
     [SerializeField] private CharacterInventoryPanel characterInventoryPanel;
     [SerializeField] private CharacterStatPanel statPanel;
     [SerializeField] private UpgradeCharacterPanel upgradeCharacterPanel;
+    [SerializeField] private Button upgradeButton;
     [SerializeField] private Text nameCHaracterText;
+    [SerializeField] private Button abilityImprovementMenuButton;
     private Character character;
 
+    private void Start()
+    {
+        //abilityImprovementMenuButton.onClick.AddListener(() => )
+    }
     public void Init(Character _character)
     {
         if (character == _character)
@@ -28,11 +34,23 @@ public class CharacterInformationPanel : MonoBehaviour
         nameCHaracterText.text = character.CharacterData.Name;
 
         improvementInformationPanel.Init(character);
+        improvementInformationPanel.gameObject.SetActive(true);
 
         statPanel.Init(character);
+        statPanel.gameObject.SetActive(false);
 
         characterInventoryPanel.Init(character);
 
+        upgradeCharacterPanel.gameObject.SetActive(false);
+    }
+    public void OpenUpgradeCharacterPanel()
+    {
         upgradeCharacterPanel.Init(character);
+    }
+    public void Reset()
+    {
+        improvementInformationPanel.gameObject.SetActive(true);
+        statPanel.gameObject.SetActive(false);
+        upgradeCharacterPanel.gameObject.SetActive(false);
     }
 }

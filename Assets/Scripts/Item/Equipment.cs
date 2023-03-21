@@ -13,8 +13,8 @@ public class Equipment
     [SerializeField] private ItemPerkData itemPerk;
     [SerializeField] private int statsUpgradeLevel = 0;
     [SerializeField] private int perkUpgradeLevel = 0;
-    private const int maxLevelStatsUpgrade = 4;
-    private const int maxLevelPerkUpgrade = 4;
+    private const int maxLevelStatsUpgrade = 5;
+    private const int maxLevelPerkUpgrade = 5;
 
     public ChangedOwner changedOwnerEvent;
     public ImprovedStats improvedStatsEvent;
@@ -33,6 +33,13 @@ public class Equipment
     {
         equipmentData = _equipmentData;
         itemPerk = equipmentData.PossiblePerks[Random.Range(0, equipmentData.PossiblePerks.Length)];
+    }
+    public Equipment(EquipmentData _equipmentData, int levelUpgrade, int levelImprove)
+    {
+        equipmentData = _equipmentData;
+        itemPerk = equipmentData.PossiblePerks[Random.Range(0, equipmentData.PossiblePerks.Length)];
+        statsUpgradeLevel = levelUpgrade;
+        perkUpgradeLevel = levelImprove;
     }
     public void ToClothe(Character _character)
     {

@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestData : MonoBehaviour
+[CreateAssetMenu(menuName = "Chest", fileName = "NewChest")]
+public class ChestData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private string nameChest;
+    [SerializeField] private string descriptionChest;
+    [SerializeField] private GameObject chestPrefab;
+    [SerializeField] private ChestRewardsData rewardsData;
+    public string NameChest => nameChest;
+    public string DescriptionChest => descriptionChest;
+    public GameObject ChestPrefab => chestPrefab;
+    public ChestRewardsData RewardsData => rewardsData;
 }

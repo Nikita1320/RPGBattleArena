@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "newChest", fileName = "New Chest")]
+[CreateAssetMenu(menuName = "Rewards Chest", fileName = "NewRewardsChest")]
 public class ChestRewardsData : ScriptableObject
 {
     [SerializeField] private ChestReward<EquipmentData> commonEquipmentRewards;

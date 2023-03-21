@@ -91,4 +91,8 @@ public class CharactersPanel : MonoBehaviour
         demoCharacter.transform.Rotate(0, 180, 0);
         demoCharacter.transform.SetParent(transform);
     }
+    private void OnEnable()
+    {
+
+    }
 }

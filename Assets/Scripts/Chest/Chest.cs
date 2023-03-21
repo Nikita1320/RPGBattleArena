@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] private GameObject chestPrefab;
-    [SerializeField] private ChestRewardsData rewardsData;
+    [SerializeField] private ChestData chestData;
     [SerializeField] private int ammountEquipmentRewards;
     [SerializeField] private int ammountCharacterCardRewards;
     [SerializeField] private List<ChestReward<EquipmentData>> equipmentRewards = new();
     [SerializeField] private List<ChestReward<CharacterCardData>> characterCardRewards = new();
 
+
     private float sumEquipmentProbability;
     private float sumCharacterCardProbability;
-    public GameObject PrefabChest => chestPrefab;
+    public ChestData ChestData => chestData;
     private void Start()
     {
         InitializeRewards();
@@ -92,14 +92,14 @@ public class Chest : MonoBehaviour
     }
     private void InitializeRewards()
     {
-        equipmentRewards.Add(rewardsData.CommonEquipmentRewards);
-        equipmentRewards.Add(rewardsData.EpicEquipmentRewards);
-        equipmentRewards.Add(rewardsData.LegendaryEquipmentRewards);
-        equipmentRewards.AddRange(rewardsData.EquipmentRewardsWithCustomProbability);
+        equipmentRewards.Add(chestData.RewardsData.CommonEquipmentRewards);
+        equipmentRewards.Add(chestData.RewardsData.EpicEquipmentRewards);
+        equipmentRewards.Add(chestData.RewardsData.LegendaryEquipmentRewards);
+        equipmentRewards.AddRange(chestData.RewardsData.EquipmentRewardsWithCustomProbability);
 
-        characterCardRewards.Add(rewardsData.CommonCharacterCardRewards);
-        characterCardRewards.Add(rewardsData.EpicCharacterCardRewards);
-        characterCardRewards.Add(rewardsData.LegendaryCharacterCardRewards);
-        characterCardRewards.AddRange(rewardsData.CharacterCardRewardsWithCustomProbability);
+        characterCardRewards.Add(chestData.RewardsData.CommonCharacterCardRewards);
+        characterCardRewards.Add(chestData.RewardsData.EpicCharacterCardRewards);
+        characterCardRewards.Add(chestData.RewardsData.LegendaryCharacterCardRewards);
+        characterCardRewards.AddRange(chestData.RewardsData.CharacterCardRewardsWithCustomProbability);
     }
 }

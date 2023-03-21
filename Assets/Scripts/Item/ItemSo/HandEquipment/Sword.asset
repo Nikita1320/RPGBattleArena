@@ -26,6 +26,7 @@ MonoBehaviour:
     - 6
     - 6
     - 8
+    - 9
   - typeValue: 0
     typeStat: 3
     value:
@@ -34,6 +35,7 @@ MonoBehaviour:
     - 3
     - 4
     - 5
+    - 6
   possiblePerks:
   - {fileID: 11400000, guid: f573b6471f7893a4eacabbde899aa1ec, type: 2}
   - {fileID: 11400000, guid: 19ba22c6859229d44b869eb73d352df5, type: 2}

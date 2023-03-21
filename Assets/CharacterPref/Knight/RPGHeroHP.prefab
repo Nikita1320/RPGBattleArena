@@ -1037,6 +1037,16 @@ GameObject:
   - component: {fileID: 4793914266666037694}
   - component: {fileID: 4793914266666037695}
   - component: {fileID: 4793914266666037664}
+  - component: {fileID: -2965948289276639820}
+  - component: {fileID: 7004350616313049463}
+  - component: {fileID: -5685719936669294168}
+  - component: {fileID: -6052708483812504785}
+  - component: {fileID: 2188927617522427207}
+  - component: {fileID: 9054108864715625282}
+  - component: {fileID: -8298914052070122869}
+  - component: {fileID: -5013200452442699353}
+  - component: {fileID: -4251923547111436951}
+  - component: {fileID: -4914686248622008368}
   m_Layer: 9
   m_Name: RPGHeroHP
   m_TagString: Untagged
@@ -1122,8 +1132,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 4793914266666037694}
-  moveSpeed: 4
-  rotateSpeed: 720
+  moveSpeed:
+    baseValue: 0
+    increseValueByLevel: 0
+    valueUpgrade: 0
+    coefficientUpgrade: 0
+  rotateSpeed:
+    baseValue: 0
+    increseValueByLevel: 0
+    valueUpgrade: 0
+    coefficientUpgrade: 0
   animator: {fileID: 4887442902586164500}
 --- !u!195 &4793914266666037694
 NavMeshAgent:
@@ -1165,26 +1183,26 @@ MonoBehaviour:
   allies: []
   attackSpeed:
     baseValue: 2
+    increseValueByLevel: 0
     valueUpgrade: 0
     coefficientUpgrade: 1
-    level: 0
   damage:
     baseValue: 35
+    increseValueByLevel: 0
     valueUpgrade: 0
     coefficientUpgrade: 1
-    level: 0
   animator: {fileID: 4887442902586164500}
   currentTimeToReadyattack: 0
   radiusAttack:
     baseValue: 1
+    increseValueByLevel: 0
     valueUpgrade: 0
     coefficientUpgrade: 1
-    level: 0
   rangeAttack:
     baseValue: 2
+    increseValueByLevel: 0
     valueUpgrade: 0
     coefficientUpgrade: 1
-    level: 0
 --- !u!114 &4793914266666037664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,6 +1220,221 @@ MonoBehaviour:
   angularAttack: 10
   damagableObject: []
   target: {fileID: 0}
+--- !u!114 &-2965948289276639820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5af6eda941a9b43b5e043f44458e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeAbilities:
+  - {fileID: 7004350616313049463}
+  - {fileID: -5685719936669294168}
+  - {fileID: -6052708483812504785}
+  passiveAbilities:
+  - {fileID: 2188927617522427207}
+  - {fileID: 9054108864715625282}
+  - {fileID: -8298914052070122869}
+  - {fileID: -5013200452442699353}
+  - {fileID: -4251923547111436951}
+  - {fileID: -4914686248622008368}
+--- !u!114 &7004350616313049463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d73a6ae4a51b3a4ab58408ea6eea045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Active1
+  description:
+  - 
+  - ActiveLevel1
+  - ActiveLevel2
+  - ActiveLevel3
+  icon: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
+  level: 0
+--- !u!114 &-5685719936669294168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af345c6ade7645e4691f88da69d85f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Active2
+  description:
+  - 
+  - ActiveLevel3
+  - ActiveLevel4
+  - ActiveLevel5
+  icon: {fileID: 21300000, guid: 8a5f9829a049c704fa992203bfc451f2, type: 3}
+  level: 0
+--- !u!114 &-6052708483812504785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463b1cfeddc357f4fa4c714b516e20e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Active3
+  description:
+  - 
+  - ActiveLevel1
+  - ActiveLevel2
+  - ActiveLevel3
+  icon: {fileID: 21300000, guid: 7092324b93851a14c858530cca4a6b26, type: 3}
+  level: 0
+--- !u!114 &2188927617522427207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7727a194aa77448805b41d1bca136d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Passive1
+  description:
+  - 
+  - PassiveLevel1
+  - PassiveLevel2
+  - PassiveLevel3
+  - PassiveLevel4
+  - PassiveLevel5
+  icon: {fileID: 21300000, guid: aeb31def086466745b570d082197ee1f, type: 3}
+  level: 0
+--- !u!114 &9054108864715625282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ceb8821703054387928fabd296a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Passive2
+  description:
+  - 
+  - PassiveLevel1
+  - PassiveLevel2
+  - PassiveLevel3
+  - PassiveLevel4
+  - PassiveLevel5
+  icon: {fileID: 21300000, guid: d473e35d9c998d443a00d04000f893e5, type: 3}
+  level: 0
+--- !u!114 &-8298914052070122869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058606714a7a69c40872b691029dac77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Passive3
+  description:
+  - 
+  - PassiveLevel1
+  - PassiveLevel2
+  - PassiveLevel3
+  - PassiveLevel4
+  - PassiveLevel5
+  icon: {fileID: 21300000, guid: 51dcbb3542a768b49ac5942bd2a0c8bb, type: 3}
+  level: 0
+--- !u!114 &-5013200452442699353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da139d3a60b42b4aaf1e6aa33c9afca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Passive4
+  description:
+  - 
+  - PassiveLevel1
+  - PassiveLevel2
+  - PassiveLevel3
+  - PassiveLevel4
+  - PassiveLevel5
+  icon: {fileID: 21300000, guid: 63b30c77b2de31d4398b65d935f4713c, type: 3}
+  level: 0
+--- !u!114 &-4251923547111436951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9f94bf08fd4d34a9a90d1dbcf5147b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Passive5
+  description:
+  - 
+  - PassiveLevel1
+  - PassiveLevel2
+  - PassiveLevel3
+  - PassiveLevel4
+  - PassiveLevel5
+  icon: {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
+  level: 0
+--- !u!114 &-4914686248622008368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792639890366572556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc00e85c4d167847b8d6d8e3bcc6cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameAbility: Passive6
+  description:
+  - 
+  - PassiveLevel1
+  - PassiveLevel2
+  - PassiveLevel3
+  - PassiveLevel4
+  - PassiveLevel5
+  icon: {fileID: 21300000, guid: b123bdad4f47a734c80135e456f2d162, type: 3}
+  level: 0
 --- !u!1 &4792679655360232988
 GameObject:
   m_ObjectHideFlags: 0
