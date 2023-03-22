@@ -17,3 +17,8 @@ MonoBehaviour:
   chestPrefab: {fileID: 677724717077671438, guid: 9238bd35c9593034b92569fc12d4a190,
     type: 3}
   rewardsData: {fileID: 11400000, guid: c3aafdaef2996444393f735eb5e1de93, type: 2}
+  costs:
+  - resourceType: 1
+    price: 400
+  - resourceType: 0
+    price: 1

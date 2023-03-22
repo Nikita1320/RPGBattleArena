@@ -151,13 +151,13 @@ public class ChestDescription : MonoBehaviour
     {
         foreach (var item in equipmentsWithUniqueProbabilitie)
         {
-            Destroy(item);
+            Destroy(item.gameObject);
         }
         equipmentsWithUniqueProbabilitie.Clear();
 
         foreach (var item in characterCardsWithUniqueProbability)
         {
-            Destroy(item);
+            Destroy(item.gameObject);
         }
         characterCardsWithUniqueProbability.Clear();
     }

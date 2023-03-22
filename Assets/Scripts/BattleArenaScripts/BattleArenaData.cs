@@ -19,8 +19,9 @@ public class BattleArenaData : ScriptableObject
     [SerializeField] private int minLevelImprovePerkEquipmment;
     [SerializeField] private int maxLevelImprovePerkEquipmment;
 
-    public GameObject Map => map;
+    [SerializeField] private BattleReward[] battleRewards;
 
+    public GameObject Map => map;
     public CharacterData[] PossibleEnemys => possibleEnemys;
     public int MinRank => minRank;
     public int MaxRank => maxRank;
@@ -30,4 +31,5 @@ public class BattleArenaData : ScriptableObject
     public int MaxLevelUpgradeStatsEquipmment => maxLevelUpgradeStatsEquipmment;
     public int MinLevelImprovePerkEquipmment => minLevelImprovePerkEquipmment;
     public int MaxLevelImprovePerkEquipmment => maxLevelImprovePerkEquipmment;
+    public BattleReward[] BattleRewards => battleRewards;
 }

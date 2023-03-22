@@ -9,8 +9,10 @@ public class ChestData : ScriptableObject
     [SerializeField] private string descriptionChest;
     [SerializeField] private GameObject chestPrefab;
     [SerializeField] private ChestRewardsData rewardsData;
+    [SerializeField] private Cost[] costs;
     public string NameChest => nameChest;
     public string DescriptionChest => descriptionChest;
     public GameObject ChestPrefab => chestPrefab;
     public ChestRewardsData RewardsData => rewardsData;
+    public Cost[] Costs => costs;
 }

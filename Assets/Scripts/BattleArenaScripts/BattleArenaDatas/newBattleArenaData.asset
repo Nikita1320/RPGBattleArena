@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9f319a9a08c164d8b6594780233774, type: 3}
+  m_Name: newBattleArenaData
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  possibleEnemys:
+  - {fileID: 11400000, guid: 19d10f08bd6224644b635671e541ee1c, type: 2}
+  - {fileID: 11400000, guid: faa609eded9371c45bbe398491e094b4, type: 2}
+  minRank: 1
+  maxRank: 2
+  possibleEquipments: []
+  minLevelUpgradeStatsEquipmment: 0
+  maxLevelUpgradeStatsEquipmment: 0
+  minLevelImprovePerkEquipmment: 0
+  maxLevelImprovePerkEquipmment: 0
+  battleRewards:
+  - resourceType: 1
+    minAmmount: 100
+    maxAmmount: 500
+  - resourceType: 0
+    minAmmount: 0
+    maxAmmount: 3

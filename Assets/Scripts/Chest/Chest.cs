@@ -10,7 +10,6 @@ public class Chest : MonoBehaviour
     [SerializeField] private List<ChestReward<EquipmentData>> equipmentRewards = new();
     [SerializeField] private List<ChestReward<CharacterCardData>> characterCardRewards = new();
 
-
     private float sumEquipmentProbability;
     private float sumCharacterCardProbability;
     public ChestData ChestData => chestData;

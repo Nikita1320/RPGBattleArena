@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardImage: {fileID: 222245553040632553}
-  rareImage: {fileID: 4229736494170509271}
+  backGroundImage: {fileID: 4229736494170509271}
 --- !u!1 &4964895610620147797
 GameObject:
   m_ObjectHideFlags: 0
