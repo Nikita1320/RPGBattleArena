@@ -33,4 +33,8 @@ public class Health : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public virtual void InitializeStat(Character character)
+    {
+
+    }
 }

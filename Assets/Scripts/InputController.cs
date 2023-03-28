@@ -9,9 +9,19 @@ public class InputController: MonoBehaviour
     private Vector3 direction;
     private void Update()
     {
-        direction = new Vector3(Input.GetAxis("Horizontal") + movementController.transform.position.x, 0, Input.GetAxis("Vertical") + movementController.transform.position.z);
-        movementController.Move(direction);
-        Debug.Log(direction);
+        var xInput = Input.GetAxis("Horizontal");
+        var zInput = Input.GetAxis("Vertical");
+        var inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("StartMove");
+            movementController.Move(Vector3.zero);
+        }
+        if (inputDirection != Vector3.zero)
+        {
+            movementController.Move(new Vector3(transform.position.x + xInput, 0, transform.position.z + zInput));
+            Debug.Log(inputDirection);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             combatSystem.Attack();

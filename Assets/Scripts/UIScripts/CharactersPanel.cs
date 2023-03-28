@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class CharactersPanel : MonoBehaviour
 {
-    private CharactersManager charactersManager;
-    private CharacterUICell selectedCell;
-    private GameObject demoCharacter;
     [SerializeField] private CharacterInformationPanel informationPanel;
     [SerializeField] private Button selectedCharacterButton;
     [SerializeField] private EquipmentSelectionPanel equipmentSelectionPanel;
@@ -20,11 +17,15 @@ public class CharactersPanel : MonoBehaviour
     [SerializeField] private GameObject epicCharacterCellsConteiner;
     [SerializeField] private GameObject legendCharacterCellsConteiner;
 
+    private CharactersManager charactersManager;
+    private CharacterUICell selectedCell;
+    private GameObject demoCharacterGameObject;
+
     private List<CharacterUICell> commonCharacterCells = new();
     private List<CharacterUICell> epicCharacterCells = new();
     private List<CharacterUICell> legendaryCharacterCells = new();
 
-    public Character SelectCharacter => selectedCell.Character;
+    public Character DemonstrationCharacter => selectedCell.Character;
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class CharactersPanel : MonoBehaviour
             var cell = Instantiate(prefab, commonCharacterCellsConteiner.transform);
             cell.Init(commonCharacters[i]);
             commonCharacterCells.Add(cell);
-            cell.CellButton.onClick.AddListener(() => DemonstrateCharacter(cell));
+            cell.CellButton.onClick.AddListener(() => SelectCell(cell));
         }
 
         var epicCharacters = charactersManager.GetCharactersByRarity(RarityCharacter.Epic);
@@ -48,7 +49,7 @@ public class CharactersPanel : MonoBehaviour
             var cell = Instantiate(prefab, epicCharacterCellsConteiner.transform);
             cell.Init(epicCharacters[i]);
             epicCharacterCells.Add(cell);
-            cell.CellButton.onClick.AddListener(() => DemonstrateCharacter(cell));
+            cell.CellButton.onClick.AddListener(() => SelectCell(cell));
         }
 
         var legendaryCharacters = charactersManager.GetCharactersByRarity(RarityCharacter.Legendary);
@@ -57,13 +58,14 @@ public class CharactersPanel : MonoBehaviour
             var cell = Instantiate(prefab, legendCharacterCellsConteiner.transform);
             cell.Init(legendaryCharacters[i]);
             legendaryCharacterCells.Add(cell);
-            cell.CellButton.onClick.AddListener(() => DemonstrateCharacter(cell));
+            cell.CellButton.onClick.AddListener(() => SelectCell(cell));
         }
     }
-    public void DemonstrateCharacter(CharacterUICell characterCell)
+    public void SelectCell(CharacterUICell characterCell)
     {
         if (selectedCell != null)
         {
+            DemonstrationCharacter.reachedFirstRank -= SetActiveSelectButton;
             if (selectedCell == characterCell)
             {
                 return;
@@ -73,26 +75,31 @@ public class CharactersPanel : MonoBehaviour
                 selectedCell.RemoveHighlightConteiner();
             }
         }
-        selectedCharacterButton.interactable = characterCell.Character.IsOpen;
-
         selectedCell = characterCell;
+
+        SetActiveSelectButton();
+        DemonstrationCharacter.reachedFirstRank += SetActiveSelectButton;
+
         informationPanel.Init(selectedCell.Character);
 
         SpawnDemonstrationCharacterPrefab();
     }
     private void SpawnDemonstrationCharacterPrefab()
     {
-        if (demoCharacter != null)
+        if (demoCharacterGameObject != null)
         {
-            Destroy(demoCharacter);
+            Destroy(demoCharacterGameObject);
         }
-        demoCharacter = Instantiate(selectedCell.Character.CharacterData.DemonstrationPrefabCharacter);
-        demoCharacter.transform.position = spawnPoint.position;
-        demoCharacter.transform.Rotate(0, 180, 0);
-        demoCharacter.transform.SetParent(transform);
+        demoCharacterGameObject = Instantiate(selectedCell.Character.CharacterData.DemonstrationPrefabCharacter, spawnPoint);
+        demoCharacterGameObject.transform.localPosition = Vector3.zero;
     }
-    private void OnEnable()
+    private void SetActiveSelectButton()
     {
-
+        selectedCharacterButton.gameObject.SetActive(DemonstrationCharacter.IsOpen);
+    }
+    public void ConfirmSelection()
+    {
+        charactersManager.SelectCharacter(DemonstrationCharacter);
+        Debug.Log("SelectCharacter");
     }
 }

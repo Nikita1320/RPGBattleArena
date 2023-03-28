@@ -15,4 +15,8 @@ public class EffectManager : MonoBehaviour
     {
         
     }
+    public virtual void InitializeStat(Character character)
+    {
+
+    }
 }

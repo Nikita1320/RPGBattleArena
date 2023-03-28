@@ -37,6 +37,13 @@ public abstract class CombatSystem : MonoBehaviour
             }
         }
     }
+    public virtual void InitializeStat(Character character)
+    {
 
+    }
+    public void AddAllies(Health ally)
+    {
+        allies.Add(ally);
+    }
     public abstract bool Attack();
 }

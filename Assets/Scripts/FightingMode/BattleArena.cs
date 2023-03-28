@@ -4,27 +4,67 @@ using UnityEngine;
 
 public class BattleArena : MonoBehaviour
 {
+    [SerializeField] private BattleArenaData battleArenaData;
     [SerializeField] private int countEnemy;
-    [SerializeField] private GameObject[] typeEnemy;
-    [SerializeField] private Vector3[] spawnPoint;
-    [SerializeField] private GameObject testCharacterPlayer;
+    [SerializeField] private List<Vector3> spawnPoints;
+    [SerializeField] private List<Vector3> freeSpawnPoints;
     [SerializeField] private InputController inputController;
-    private GameObject playerCharacter;
+    [SerializeField] private List<Behaviour> enemyBehaviours;
+    [SerializeField] private Health playerCharacter;
+    [SerializeField] private List<Health> enemyes;
 
     private void Awake()
     {
-        PlayerManager player = PlayerManager.Instance;
-        PlayerManager.selectedCharacter = testCharacterPlayer;
-        playerCharacter = Instantiate(PlayerManager.selectedCharacter);
-        playerCharacter.transform.position = spawnPoint[0];
-        Destroy(playerCharacter.GetComponent<CharacterBehaviour>());
-        inputController.Init(playerCharacter);
+        freeSpawnPoints = spawnPoints;
+        battleArenaData = BattleArenaMenu.SelectedBattleArenaData;
+        var playerGameobject = SpawnCharacter(CharactersManager.Instance.SelectedCharacter);
+        inputController.Init(playerGameobject);
+        Debug.Log("InstancePlayer");
+        for (int i = 0; i < countEnemy; i++)
+        {
+            var enemy = new Character(battleArenaData.PossibleEnemys[Random.Range(0, battleArenaData.PossibleEnemys.Length)],
+            Random.Range(battleArenaData.MinRank, battleArenaData.MaxRank));
+            enemy.AbilityTree.RandomImprove();
+
+            var enemyGameobject = SpawnCharacter(enemy);
+            enemyBehaviours.Add(enemyGameobject.GetComponent<Behaviour>());
+            enemyGameobject.GetComponent<MovementController>().InitializeStat(enemy);
+            enemyGameobject.GetComponent<CombatSystem>().InitializeStat(enemy);
+            //enemyGameobject.GetComponent<EffectManager>().InitializeStat(enemy);
+            var health = enemyGameobject.GetComponent<Health>();
+            health.InitializeStat(enemy);
+            enemyes.Add(health);
+            Debug.Log("InstanceEnemy: "+ i);
+        }
+        StartBattle();
     }
     private void Start()
     {
-        for (int i = 0; i < countEnemy; i++)
+        
+    }
+    private void StartBattle()
+    {
+        Debug.Log("Turning on Behaviours");
+        foreach (var item in enemyBehaviours)
         {
-            Instantiate(typeEnemy[Random.Range(0, typeEnemy.Length)]).transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)];
+            item.enabled = true;
         }
+        inputController.enabled = true;
+    }
+    private void win()
+    {
+
+    }
+    private void Loose()
+    {
+
+    }
+    private GameObject SpawnCharacter(Character character)
+    {
+        var randomPoint = freeSpawnPoints[Random.Range(0, freeSpawnPoints.Count)];
+        freeSpawnPoints.Remove(randomPoint);
+        var characterGameobject = (Instantiate(character.CharacterData.PrefabCharacter));
+        characterGameobject.transform.position = randomPoint;
+        return characterGameobject;
     }
 }

@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private FloatStat moveSpeed;
     [SerializeField] private FloatStat rotateSpeed;
     [SerializeField] private Animator animator;
+    [SerializeField] private bool iHavePath;
     public bool isMoving => navMeshAgent.hasPath;
     private void Start()
     {
@@ -17,11 +18,19 @@ public class MovementController : MonoBehaviour
     }
     private void Update()
     {
-        animator.SetBool("isMoving", isMoving);
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", isMoving);
+        }
+        iHavePath = navMeshAgent.hasPath;
     }
     public void Move(Vector3 direction)
     {
         navMeshAgent.SetDestination(direction);
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction - transform.position), rotateSpeed);
+    }
+    public virtual void InitializeStat(Character character)
+    {
+
     }
 }

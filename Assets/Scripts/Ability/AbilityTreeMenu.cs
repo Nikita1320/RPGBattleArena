@@ -11,10 +11,6 @@ public class AbilityTreeMenu : MonoBehaviour
     [SerializeField] private AbilityCell[] cellsFirstBranch;
     [SerializeField] private AbilityCell[] cellsSecondBranch;
     [SerializeField] private AbilityCell[] cellsThirdBranch;
-    [SerializeField] private int maxLevelActiveAbility;
-    [SerializeField] private int maxLevelPassiveAbility;
-    [SerializeField] private int[] rankOpeningBranch;
-    [SerializeField] private int stepUpgradePassiveAbility = 2;
     [SerializeField] private Text freePoints;
     private Dictionary<int, AbilityCell[]> branchs = new();
 
@@ -25,11 +21,11 @@ public class AbilityTreeMenu : MonoBehaviour
 
     public void OpenAbilityTreeMenu()
     {
-        if (charactersPanel.SelectCharacter == null)
+        if (charactersPanel.DemonstrationCharacter == null)
         {
             return;
         }
-        character = charactersPanel.SelectCharacter;
+        character = charactersPanel.DemonstrationCharacter;
         freePoints.text = "Free point: " + character.AbilityTree.FreePoints.ToString();
         gameObject.SetActive(true);
         abilityDescription.gameObject.SetActive(false);
@@ -65,7 +61,7 @@ public class AbilityTreeMenu : MonoBehaviour
             }
         }
 
-        if (character.Rank >= rankOpeningBranch[2])
+        if (character.Rank >= character.AbilityTree.OpenBranchRanks[2])
         {
             for (int i = 0; i < branchs.Count; i++)
             {
@@ -83,7 +79,7 @@ public class AbilityTreeMenu : MonoBehaviour
                 }
             }
         }
-        else if (character.Rank >= rankOpeningBranch[1])
+        else if (character.Rank >= character.AbilityTree.OpenBranchRanks[1])
         {
             for (int i = 0; i < branchs.Count - 1; i++)
             {
@@ -101,7 +97,7 @@ public class AbilityTreeMenu : MonoBehaviour
                 }
             }
         }
-        else if(character.Rank >= rankOpeningBranch[0])
+        else if(character.Rank >= character.AbilityTree.OpenBranchRanks[0])
         {
             for (int i = 0; i < branchs.Count - 2; i++)
             {
@@ -166,20 +162,20 @@ public class AbilityTreeMenu : MonoBehaviour
 
         if (selectedAbilityCell.Ability == branchs[bracnhSelectedAbility][0].Ability)
         {
-            if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == maxLevelActiveAbility)
+            if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == character.AbilityTree.MaxLevelActiveAbility)
             {
                 improveButton.interactable = false;
             }
         }
         else
         {
-            if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == maxLevelPassiveAbility)
+            if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == character.AbilityTree.MaxLevelPassiveAbility)
             {
                 improveButton.interactable = false;
             }
             else
             {
-                if (((stepUpgradePassiveAbility + character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability]) >= character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability]) && character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability] > 0)
+                if (((character.AbilityTree.StepImprovedPassiveAbility + character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability]) >= character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability]) && character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability] > 0)
                 {
                     improveButton.interactable = true;
                 }

@@ -6,6 +6,8 @@ public class CharactersMenu : MonoBehaviour
 {
     [SerializeField] private CharacterInformationPanel informationPanel;
     [SerializeField] private EquipmentSelectionPanel equipmentSelectionPanel;
+    [SerializeField] private CamerasSwitcher camerasSwitcher;
+    [SerializeField] private List<Camera> sceneCameras;
     private void OnDisable()
     {
         informationPanel.Reset();
@@ -13,6 +15,6 @@ public class CharactersMenu : MonoBehaviour
     }
     private void OnEnable()
     {
-        
+        camerasSwitcher.SwitchCamera(sceneCameras);
     }
 }

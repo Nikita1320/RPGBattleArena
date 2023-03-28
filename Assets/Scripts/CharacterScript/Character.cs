@@ -75,6 +75,34 @@ public class Character
             }
         }
     }
+    public Character()
+    {
+
+    }
+    public Character(CharacterData characterData,int rank)
+    {
+        this.characterData = characterData;
+        this.rankCharacter = rank;
+        var stats = CharacterData.CharacterStat.GetStats();
+
+        for (int i = 0; i < stats.Length; i++)
+        {
+            characterStats.Add(stats[i].TypeStat, new CharacterStat(this, stats[i]));
+        }
+        abilityTree = new(this);
+    }
+    public Character(CharacterData characterData, int rank, int[,] improvementAbility)
+    {
+        this.characterData = characterData;
+        this.rankCharacter = rank;
+        var stats = CharacterData.CharacterStat.GetStats();
+
+        for (int i = 0; i < stats.Length; i++)
+        {
+            characterStats.Add(stats[i].TypeStat, new CharacterStat(this, stats[i]));
+        }
+        abilityTree = new(this);
+    }
     public void Init()
     {
         var stats = CharacterData.CharacterStat.GetStats();

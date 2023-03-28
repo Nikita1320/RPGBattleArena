@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 public class ChestShop : MonoBehaviour
 {
+    [SerializeField] private CamerasSwitcher camerasSwitcher;
+    [SerializeField] private List<Camera> sceneCameras;
+
     [SerializeField] private Bank bank;
     [SerializeField] private Chest[] chest;
     [SerializeField] private Chest selectedChest;
@@ -138,6 +141,7 @@ public class ChestShop : MonoBehaviour
     }
     private void OnEnable()
     {
+        camerasSwitcher.SwitchCamera(sceneCameras);
         SelectChest(chest[0]);
     }
 }

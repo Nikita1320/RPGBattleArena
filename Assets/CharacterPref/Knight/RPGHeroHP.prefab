@@ -1143,6 +1143,7 @@ MonoBehaviour:
     valueUpgrade: 0
     coefficientUpgrade: 0
   animator: {fileID: 4887442902586164500}
+  iHavePath: 0
 --- !u!195 &4793914266666037694
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1210,7 +1211,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4792639890366572556}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 891f859ae8d41a142983f3eb0e8d7c56, type: 3}
   m_Name: 
