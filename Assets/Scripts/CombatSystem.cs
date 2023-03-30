@@ -9,8 +9,8 @@ public abstract class CombatSystem : MonoBehaviour
 
     [SerializeField] protected LayerMask damagableLayer = 9;
     [SerializeField] protected List<Health> allies;
-    [SerializeField] protected FloatStat attackSpeed = new();
-    [SerializeField] protected FloatStat damage = new();
+    [SerializeField] protected FloatStat attackSpeed;
+    [SerializeField] protected FloatStat damage;
     [SerializeField] protected Animator animator;
     [SerializeField] protected float currentTimeToReadyattack = 0;
     protected bool mayAttack = true;
@@ -39,7 +39,8 @@ public abstract class CombatSystem : MonoBehaviour
     }
     public virtual void InitializeStat(Character character)
     {
-
+        damage = new FloatStat(character.Stats[TypeStat.Damage].Value);
+        attackSpeed = new FloatStat(character.Stats[TypeStat.AttackSpeed].Value);
     }
     public void AddAllies(Health ally)
     {

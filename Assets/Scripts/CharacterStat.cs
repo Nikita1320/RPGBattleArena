@@ -36,7 +36,11 @@ public class FloatStat
     [SerializeField] protected float baseValue;
     [SerializeField] private float increseValueByLevel;
     [SerializeField] private float valueUpgrade;
-    [SerializeField] private float coefficientUpgrade;
+    [SerializeField] private float coefficientUpgrade = 1;
+    public FloatStat(float baseValue)
+    {
+        this.baseValue = baseValue;
+    }
     public float ValueUpgrade { get { return valueUpgrade; } set { valueUpgrade += value; changedValue?.Invoke(); } }
     public float CoefficientUpgrade { get { return coefficientUpgrade; } set { coefficientUpgrade *= value; changedValue?.Invoke(); } }
 

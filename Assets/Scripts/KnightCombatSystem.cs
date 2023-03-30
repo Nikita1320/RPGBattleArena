@@ -48,4 +48,10 @@ public class KnightCombatSystem : CombatSystem
         isAttacking = false;
         attacked?.Invoke();
     }
+    public override void InitializeStat(Character character)
+    {
+        base.InitializeStat(character);
+        radiusAttack = new FloatStat(character.Stats[TypeStat.RangeArea].Value);
+        rangeAttack = new FloatStat(character.Stats[TypeStat.RangeAttack].Value);
+    }
 }

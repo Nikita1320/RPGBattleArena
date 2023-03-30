@@ -109,7 +109,10 @@ public class BattleArenaMenu : MonoBehaviour
     }
     private void StartBattleArena()
     {
-        SceneLoader.Instance.LoadScene(battleArenaScene);
+        if (CharactersManager.Instance.SelectedCharacter != null)
+        {
+            SceneLoader.Instance.LoadScene(battleArenaScene);
+        }
     }
     private void OnDisable()
     {

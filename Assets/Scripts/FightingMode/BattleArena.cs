@@ -9,16 +9,22 @@ public class BattleArena : MonoBehaviour
     [SerializeField] private List<Vector3> spawnPoints;
     [SerializeField] private List<Vector3> freeSpawnPoints;
     [SerializeField] private InputController inputController;
-    [SerializeField] private List<Behaviour> enemyBehaviours;
+    [SerializeField] private List<CharacterBehaviour> enemyBehaviours;
     [SerializeField] private Health playerCharacter;
     [SerializeField] private List<Health> enemyes;
 
     private void Awake()
     {
+        countEnemy = 3;
         freeSpawnPoints = spawnPoints;
         battleArenaData = BattleArenaMenu.SelectedBattleArenaData;
+
         var playerGameobject = SpawnCharacter(CharactersManager.Instance.SelectedCharacter);
+        playerGameobject.GetComponent<MovementController>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
+        playerGameobject.GetComponent<CombatSystem>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
+        playerGameobject.GetComponent<Health>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
         inputController.Init(playerGameobject);
+
         Debug.Log("InstancePlayer");
         for (int i = 0; i < countEnemy; i++)
         {
@@ -27,7 +33,7 @@ public class BattleArena : MonoBehaviour
             enemy.AbilityTree.RandomImprove();
 
             var enemyGameobject = SpawnCharacter(enemy);
-            enemyBehaviours.Add(enemyGameobject.GetComponent<Behaviour>());
+            enemyBehaviours.Add(enemyGameobject.GetComponent<CharacterBehaviour>());
             enemyGameobject.GetComponent<MovementController>().InitializeStat(enemy);
             enemyGameobject.GetComponent<CombatSystem>().InitializeStat(enemy);
             //enemyGameobject.GetComponent<EffectManager>().InitializeStat(enemy);

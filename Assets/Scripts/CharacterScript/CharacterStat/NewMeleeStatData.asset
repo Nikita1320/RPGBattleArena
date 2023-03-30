@@ -21,11 +21,11 @@ MonoBehaviour:
     incrementValue: 0
     typeStat: 1
   rotateSpeed:
-    baseValue: 0
+    baseValue: 360
     incrementValue: 0
     typeStat: 2
   attackSpeed:
-    baseValue: 0
+    baseValue: 2
     incrementValue: 0
     typeStat: 3
   health:
@@ -47,10 +47,10 @@ MonoBehaviour:
   - baseValue: 10
     incrementValue: 1
     typeStat: 1
-  - baseValue: 40
+  - baseValue: 1440
     incrementValue: 4
     typeStat: 2
-  - baseValue: 70
+  - baseValue: 2
     incrementValue: 7
     typeStat: 3
   - baseValue: 500
@@ -65,7 +65,7 @@ MonoBehaviour:
   - baseValue: 1
     incrementValue: 0.1
     typeStat: 8
-  - baseValue: 0.5
+  - baseValue: 1
     incrementValue: 0.1
     typeStat: 7
   rangeAreaAttack:

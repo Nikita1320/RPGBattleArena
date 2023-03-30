@@ -41,7 +41,7 @@ public class KnightBehavior : CharacterBehaviour
                         {
                             movementController.Move(transform.position);
                             combatSystem.Attack();
-                            //Strafe();
+                            Strafe();
                         }
                     }
                     else
@@ -53,7 +53,7 @@ public class KnightBehavior : CharacterBehaviour
                             {
                                 movementController.Move(transform.position);
                                 combatSystem.Attack();
-                                //Strafe();
+                                Strafe();
                                 counter = 1;
                             }
                             else
