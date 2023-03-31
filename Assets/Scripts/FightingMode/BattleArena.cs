@@ -1,17 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleArena : MonoBehaviour
 {
     [SerializeField] private BattleArenaData battleArenaData;
-    [SerializeField] private int countEnemy;
-    [SerializeField] private List<Vector3> spawnPoints;
-    [SerializeField] private List<Vector3> freeSpawnPoints;
     [SerializeField] private InputController inputController;
     [SerializeField] private List<CharacterBehaviour> enemyBehaviours;
     [SerializeField] private Health playerCharacter;
     [SerializeField] private List<Health> enemyes;
+
+    [Header("SpawnCharactersSettings")]
+    [SerializeField] private int countEnemy;
+    [SerializeField] private List<Vector3> spawnPoints;
+    private List<Vector3> freeSpawnPoints;
+
+    [Header("CoutDownPanelSettings")]
+    [SerializeField] private float timeToStart = 6;
+    [SerializeField] private GameObject countdownPanel;
+    [SerializeField] private Text countdownText;
+    [SerializeField] private Image clock;
+    [SerializeField] private Coroutine clockAnimationCororutine;
+
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private List<ResourceRewardCell> rewardCells = new();
+    [SerializeField] private ResourceRewardCell equipmentRewardPrefab;
+
 
     private void Awake()
     {
@@ -50,7 +65,51 @@ public class BattleArena : MonoBehaviour
     }
     private void StartBattle()
     {
-        Debug.Log("Turning on Behaviours");
+        StartCoroutine(CountdownToStart());
+    }
+    private IEnumerator CountdownToStart()
+    {
+        countdownPanel.SetActive(true);
+        var remainingTime = timeToStart;
+        while (true)
+        {
+            remainingTime--;
+            if (clockAnimationCororutine != null)
+            {
+                StopCoroutine(clockAnimationCororutine);
+            }
+            clockAnimationCororutine = StartCoroutine(ClockAnimation());
+            countdownText.text = remainingTime.ToString();
+            if (remainingTime == 0)
+            {
+                countdownPanel.SetActive(false);
+                ActivateCharacters();
+                break;
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    private IEnumerator ClockAnimation()
+    {
+        if (clock.fillClockwise == true)
+            clock.fillAmount = 1;
+        else
+            clock.fillAmount = 0;
+
+        clock.fillClockwise = !clock.fillClockwise;
+
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+
+            if (clock.fillClockwise == true)
+                clock.fillAmount += Time.deltaTime;
+            else
+                clock.fillAmount -= Time.deltaTime;
+        }
+    }
+    private void ActivateCharacters()
+    {
         foreach (var item in enemyBehaviours)
         {
             item.enabled = true;

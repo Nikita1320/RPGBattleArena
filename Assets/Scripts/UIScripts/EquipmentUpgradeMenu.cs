@@ -85,9 +85,11 @@ public class EquipmentUpgradeMenu : MonoBehaviour
             ResetSelectionCells(cellsWithLevel[targetLevel]);
             currentOpenPanel = panelWithLevel[targetLevel];
             currentOpenPanel.SetActive(true);
+            equipmentsListPanel.SetActive(true);
         }
         else
         {
+            equipmentsListPanel.SetActive(false);
             applyImproveButton.interactable = false;
         }
         InstantiateCells();
@@ -188,6 +190,7 @@ public class EquipmentUpgradeMenu : MonoBehaviour
         }
         else
         {
+            equipmentsListPanel.SetActive(false);
             applyImproveButton.interactable = false;
         }
     }

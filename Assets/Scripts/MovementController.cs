@@ -19,26 +19,49 @@ public class MovementController : MonoBehaviour
         {
             animator.SetBool("isMoving", isMoving);
         }
-        if (!iHavePath)
+        if (navMeshAgent.remainingDistance <= 0.1)
         {
             navMeshAgent.ResetPath();
         }
+        if (navMeshAgent.hasPath)
+        {
+            var direction = navMeshAgent.steeringTarget - transform.position;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), rotateSpeed.Value * Time.deltaTime);
+
+
+
+            /*Vector3 newDirection = Vector3.RotateTowards(transform.forward, navMeshAgent.steeringTarget, rotateSpeed.Value * Time.deltaTime, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);*/
+        }
+        /*if (!iHavePath)
+        {
+            navMeshAgent.ResetPath();
+        }*/
         iHavePath = navMeshAgent.hasPath;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Move(Vector3.zero);
+        }
     }
-    public void Move(Vector3 direction)
+    public void Move(Vector3 targetPosition)
     {
-        navMeshAgent.SetDestination(direction);
-        Debug.Log(direction);
+        navMeshAgent.SetDestination(targetPosition);
+        /*if (rotateToCoroutine != null)
+        {
+            StopCoroutine(rotateToCoroutine);
+        }
+        rotateToCoroutine = StartCoroutine(RotateTo());*/
+        Debug.Log(targetPosition);
 
         //Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed.Value * Time.deltaTime, 0.0f);
         //transform.rotation = Quaternion.LookRotation(newDirection);
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction - transform.position), rotateSpeed);
     }
-    private IEnumerator RotateTo(Vector3 direction)
+    private IEnumerator RotateTo()
     {
         while (true)
         {
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed.Value * Time.deltaTime, 0.0f);
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, navMeshAgent.steeringTarget, rotateSpeed.Value * Time.deltaTime, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }
@@ -48,6 +71,6 @@ public class MovementController : MonoBehaviour
         rotateSpeed = new FloatStat(character.Stats[TypeStat.RotateSpeed].Value);
         navMeshAgent.speed = moveSpeed.Value;
         navMeshAgent.angularSpeed = rotateSpeed.Value;
-        //navMeshAgent.updateRotation = false;
+        navMeshAgent.updateRotation = false;
     }
 }
