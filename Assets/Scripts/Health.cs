@@ -6,9 +6,11 @@ public class Health : MonoBehaviour
 {
     public delegate void TakedDamage();
     public delegate void ChangedHP();
+    public delegate void Died();
 
     public TakedDamage takedDamage;
     public ChangedHP changedHP;
+    public Died diedEvent;
 
     [SerializeField] private float healthPoint;
     [SerializeField] private float maxHealthPoint;
@@ -31,6 +33,7 @@ public class Health : MonoBehaviour
     }
     private void Die()
     {
+        diedEvent?.Invoke();
         Destroy(gameObject);
     }
     public virtual void InitializeStat(Character character)

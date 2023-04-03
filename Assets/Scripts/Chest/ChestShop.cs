@@ -15,10 +15,7 @@ public class ChestShop : MonoBehaviour
     [SerializeField] private Chest selectedChest;
     [SerializeField] private ChestDescription chestDescription;
 
-    [SerializeField] private EquipmentRewardCell equipmentCellPrefab;
-    [SerializeField] private CharacterCardRewardCell cardCellPrefab;
-    [SerializeField] private GameObject rewardPanel;
-    [SerializeField] private GameObject rewardsConteiner;
+    [SerializeField] private RewardsPanel rewardPanel;
 
     [SerializeField] private Transform pointSpawnChest;
     [SerializeField] private GameObject chestModel;
@@ -45,43 +42,20 @@ public class ChestShop : MonoBehaviour
         {
             return;
         }
-        rewardPanel.SetActive(true);
-        selectedChest.GetRewards(ammountChest, out List<Equipment> equipmentsRewards, out List<CharacterCard> characterCardRewards);
+        selectedChest.GetRewards(ammountChest, out List<EquipmentData> equipmentsRewards, out List<CharacterCardData> characterCardRewards);
 
-        Debug.Log(equipmentsRewards.Count);
-        Debug.Log(characterCardRewards.Count);
-        foreach (var item in equipmentsRewards)
-        {
-            var cell = Instantiate(equipmentCellPrefab, rewardsConteiner.transform);
-            rewardCells.Add(cell.gameObject);
-            cell.Init(item.EquipmentData);
-        }
-        foreach (var item in characterCardRewards)
-        {
-            var cell = Instantiate(cardCellPrefab, rewardsConteiner.transform);
-            rewardCells.Add(cell.gameObject);
-            cell.Init(item.CardData);
-        }
+        rewardPanel.OpenRewardPanel(equipmentsRewards.ToArray(), characterCardRewards.ToArray());
 
         foreach (var item in equipmentsRewards)
         {
-            inventory.AddItem(item);
+            inventory.AddItem(new Equipment(item));
         }
         foreach (var item in characterCardRewards)
         {
-            inventory.AddItem(item);
+            inventory.AddItem(new CharacterCard(item));
         }
     }
 
-    public void CloseRewardsPanel()
-    {
-        rewardPanel.SetActive(false);
-        foreach (var item in rewardCells)
-        {
-            Destroy(item.gameObject);
-        }
-        rewardCells.Clear();
-    }
     public void SelectChest(Chest selectedChest)
     {
         if (this.selectedChest == selectedChest)

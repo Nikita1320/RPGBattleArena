@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,13 @@ public abstract class CombatSystem : MonoBehaviour
 
     [SerializeField] protected LayerMask damagableLayer = 9;
     [SerializeField] protected List<Health> allies;
-    [SerializeField] protected FloatStat attackSpeed;
+    [SerializeField] protected CurveStat attackSpeed;
     [SerializeField] protected FloatStat damage;
+    [SerializeField] private AnimationCurve attackSpeedCurve;
     [SerializeField] protected Animator animator;
     [SerializeField] protected float currentTimeToReadyattack = 0;
+    private float maxStatValue = 1000;
+    private float maxCurveValue = 0.3f;
     protected bool mayAttack = true;
     protected bool isAttacking = false;
     public bool MayAttack => mayAttack;
@@ -40,7 +44,7 @@ public abstract class CombatSystem : MonoBehaviour
     public virtual void InitializeStat(Character character)
     {
         damage = new FloatStat(character.Stats[TypeStat.Damage].Value);
-        attackSpeed = new FloatStat(character.Stats[TypeStat.AttackSpeed].Value);
+        attackSpeed = new CurveStat(character.Stats[TypeStat.AttackSpeed].Value, attackSpeedCurve, maxStatValue, maxCurveValue);
     }
     public void AddAllies(Health ally)
     {

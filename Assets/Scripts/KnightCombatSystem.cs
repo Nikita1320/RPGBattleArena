@@ -16,7 +16,7 @@ public class KnightCombatSystem : CombatSystem
         if (currentTimeToReadyattack == 0)
         {
             isAttacking = true;
-            currentTimeToReadyattack = attackSpeed.Value;
+            currentTimeToReadyattack = attackSpeed.GetCurveValue();
             mayAttack = false;
             animator.SetTrigger("Attack");
             return true;

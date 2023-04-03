@@ -96,7 +96,7 @@ public class BattleArenaMenu : MonoBehaviour
         }
         scrollRect.enabled = true;
     }
-    public static void Passevel()
+    public static void PassLevel()
     {
         levelPassed++;
     }

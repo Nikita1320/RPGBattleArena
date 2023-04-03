@@ -25,22 +25,10 @@ public class Chest : MonoBehaviour
             sumCharacterCardProbability += item.Probability;
         }
     }
-    public virtual void GetRewards(int ammountChestOpen, out List<Equipment> equipmentRewards, out List<CharacterCard> characterCardRewards)
+    public virtual void GetRewards(int ammountChestOpen, out List<EquipmentData> equipmentRewards, out List<CharacterCardData> characterCardRewards)
     {
-        List<Equipment> equipments = new();
-        List<CharacterCard> characterCards = new();
-
-        foreach (var item in GetEquipmentRewards(ammountChestOpen))
-        {
-            equipments.Add(new Equipment(item));
-        }
-        equipmentRewards = equipments;
-
-        foreach (var item in GetCharacterCardRewards(ammountChestOpen))
-        {
-            characterCards.Add(new CharacterCard(item));
-        }
-        characterCardRewards = characterCards;
+        equipmentRewards = GetEquipmentRewards(ammountChestOpen);
+        characterCardRewards = GetCharacterCardRewards(ammountChestOpen);
     }
     protected List<EquipmentData> GetEquipmentRewards(int ammountChest)
     {

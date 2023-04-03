@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         charactersManager = CharactersManager.Instance;
+        if (charactersManager.SelectedCharacter != null)
+        {
+            InstantiateDemonstrationCharacter(charactersManager.SelectedCharacter);
+        }
         charactersManager.changedCharacter += InstantiateDemonstrationCharacter;
     }
 

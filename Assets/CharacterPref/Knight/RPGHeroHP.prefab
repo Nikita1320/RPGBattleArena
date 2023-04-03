@@ -1188,11 +1188,61 @@ MonoBehaviour:
     increseValueByLevel: 0
     valueUpgrade: 0
     coefficientUpgrade: 1
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 5
+        inSlope: -0.9949651
+        outSlope: -0.9949651
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.14076535
+      - serializedVersion: 3
+        time: 1
+        value: 0.3
+        inSlope: -10.244369
+        outSlope: -10.244369
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.030036151
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    maxStatValue: 0
+    maxCurveValue: 0
   damage:
     baseValue: 35
     increseValueByLevel: 0
     valueUpgrade: 0
     coefficientUpgrade: 1
+  attackSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: -0.9949651
+      outSlope: -0.9949651
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.14076535
+    - serializedVersion: 3
+      time: 1
+      value: 0.3
+      inSlope: -10.244369
+      outSlope: -10.244369
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.030036151
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   animator: {fileID: 4887442902586164500}
   currentTimeToReadyattack: 0
   radiusAttack:
@@ -1836,7 +1886,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e1d555197b24cb43bbf17f696f26602, type: 2}
+  - {fileID: 2100000, guid: 6acc71550c566ce42a8bedab0c3b42af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

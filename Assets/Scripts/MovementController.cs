@@ -13,6 +13,10 @@ public class MovementController : MonoBehaviour
     [SerializeField] private bool iHavePath;
     public bool isMoving => navMeshAgent.hasPath;
 
+    private void Start()
+    {
+        navMeshAgent.updateRotation = false;
+    }
     private void Update()
     {
         if (animator != null)
@@ -71,6 +75,5 @@ public class MovementController : MonoBehaviour
         rotateSpeed = new FloatStat(character.Stats[TypeStat.RotateSpeed].Value);
         navMeshAgent.speed = moveSpeed.Value;
         navMeshAgent.angularSpeed = rotateSpeed.Value;
-        navMeshAgent.updateRotation = false;
     }
 }

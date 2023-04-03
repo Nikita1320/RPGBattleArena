@@ -7,26 +7,36 @@ public class InputController: MonoBehaviour
     [SerializeField] private GameObject character;
     [SerializeField] private MovementController movementController;
     [SerializeField] private CombatSystem combatSystem;
+    [SerializeField] private FixedJoystick fixedJoystick;
+    [SerializeField] private GameObject controllPanel;
     private void Update()
     {
-        var xInput = Input.GetAxis("Horizontal");
-        var zInput = Input.GetAxis("Vertical");
-        var inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        var direction = fixedJoystick.Direction;
 
-        if (inputDirection != Vector3.zero && movementController != null)
-        {
-            movementController.Move(new Vector3(character.transform.position.x + xInput * 3, character.transform.position.y, character.transform.position.z + zInput * 3));
-            
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && combatSystem != null)
-        {
-            combatSystem.Attack();
-        }
+        movementController.Move(new Vector3(character.transform.position.x + direction.x * 3, character.transform.position.y, character.transform.position.z + direction.y * 3));
     }
     public void Init(GameObject _character)
     {
         character = _character;
         movementController = _character.GetComponent<MovementController>();
         combatSystem = _character.GetComponent<CombatSystem>();
+    }
+    public void TryAttack()
+    {
+        if (combatSystem != null)
+        {
+            combatSystem.Attack();
+        }
+    }
+    public void OnEnable()
+    {
+        controllPanel.SetActive(true);
+    }
+    public void OnDisable()
+    {
+        if (controllPanel != null)
+        {
+            controllPanel.SetActive(false);
+        }
     }
 }

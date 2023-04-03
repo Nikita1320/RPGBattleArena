@@ -41,8 +41,8 @@ MonoBehaviour:
     incrementValue: 0
     typeStat: 6
   baseStats:
-  - baseValue: 50
-    incrementValue: 2
+  - baseValue: 2
+    incrementValue: 50
     typeStat: 0
   - baseValue: 10
     incrementValue: 1
@@ -53,7 +53,7 @@ MonoBehaviour:
   - baseValue: 2
     incrementValue: 7
     typeStat: 3
-  - baseValue: 500
+  - baseValue: 100
     incrementValue: 50
     typeStat: 4
   - baseValue: 5

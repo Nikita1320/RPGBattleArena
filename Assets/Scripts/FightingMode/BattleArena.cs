@@ -9,7 +9,7 @@ public class BattleArena : MonoBehaviour
     [SerializeField] private InputController inputController;
     [SerializeField] private List<CharacterBehaviour> enemyBehaviours;
     [SerializeField] private Health playerCharacter;
-    [SerializeField] private List<Health> enemyes;
+    [SerializeField] private List<Health> enemyes = new();
 
     [Header("SpawnCharactersSettings")]
     [SerializeField] private int countEnemy;
@@ -24,9 +24,8 @@ public class BattleArena : MonoBehaviour
     [SerializeField] private Coroutine clockAnimationCororutine;
 
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private RewardsPanel rewardsPanel;
     [SerializeField] private List<ResourceRewardCell> rewardCells = new();
-    [SerializeField] private ResourceRewardCell equipmentRewardPrefab;
-
 
     private void Awake()
     {
@@ -38,6 +37,7 @@ public class BattleArena : MonoBehaviour
         playerGameobject.GetComponent<MovementController>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
         playerGameobject.GetComponent<CombatSystem>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
         playerGameobject.GetComponent<Health>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
+        playerGameobject.GetComponent<Health>().diedEvent += DeathPlayer;
         inputController.Init(playerGameobject);
 
         Debug.Log("InstancePlayer");
@@ -54,14 +54,22 @@ public class BattleArena : MonoBehaviour
             //enemyGameobject.GetComponent<EffectManager>().InitializeStat(enemy);
             var health = enemyGameobject.GetComponent<Health>();
             health.InitializeStat(enemy);
+            health.diedEvent += () => 
+            {
+                enemyes.Remove(health);
+                if (enemyes.Count == 0) 
+                { 
+                    Win(); 
+                } 
+            };
             enemyes.Add(health);
             Debug.Log("InstanceEnemy: "+ i);
         }
         StartBattle();
     }
-    private void Start()
+    private void DeathPlayer()
     {
-        
+        Loose();
     }
     private void StartBattle()
     {
@@ -116,13 +124,39 @@ public class BattleArena : MonoBehaviour
         }
         inputController.enabled = true;
     }
-    private void win()
+    private void Win()
     {
-
+        BattleArenaMenu.PassLevel();
+        StopGame();
+        StartCoroutine(WinAnimation());
+    }
+    private IEnumerator WinAnimation()
+    {
+        winPanel.SetActive(true);
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+            winPanel.SetActive(false);
+            GetReward();
+            break;
+        }
+    }
+    private void GetReward()
+    {
+        List<ResourceReward> resourceRewards = new();
+        foreach (var item in battleArenaData.BattleRewards)
+        {
+            var randomValue = Random.Range(item.MinAmmount, item.MaxAmmount);
+            if (randomValue > 0)
+            {
+                resourceRewards.Add(new ResourceReward(item.ResourceType, randomValue));
+            }
+        }
+        rewardsPanel.OpenRewardPanel(resourceRewards: resourceRewards.ToArray());
     }
     private void Loose()
     {
-
+        StopGame();
     }
     private GameObject SpawnCharacter(Character character)
     {
@@ -131,5 +165,20 @@ public class BattleArena : MonoBehaviour
         var characterGameobject = (Instantiate(character.CharacterData.PrefabCharacter));
         characterGameobject.transform.position = randomPoint;
         return characterGameobject;
+    }
+    private void StopGame()
+    {
+        foreach (var item in enemyBehaviours)
+        {
+            if (item != null)
+            {
+                item.enabled = false;
+            }
+        }
+        inputController.enabled = false;
+    }
+    public void BackToMainMenu()
+    {
+        SceneLoader.Instance.LoadScene(0);
     }
 }

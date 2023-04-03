@@ -46,3 +46,27 @@ public class FloatStat
 
     public float Value => (baseValue + valueUpgrade) * coefficientUpgrade;
 }
+[Serializable]
+public class CurveStat: FloatStat
+{
+    [SerializeField] private AnimationCurve animationCurve;
+    [SerializeField] private float maxStatValue;
+    [SerializeField] private float maxCurveValue;
+    public CurveStat(float baseValue, AnimationCurve animationCurve, float maxStatValue, float maxCurveValue) :base(baseValue)
+    {
+        this.animationCurve = animationCurve;
+        this.maxStatValue = maxStatValue;
+        this.maxCurveValue = maxCurveValue;
+    }
+    public float GetCurveValue()
+    {
+        if (Value >= maxStatValue)
+        {
+            return maxCurveValue;
+        }
+        else
+        {
+            return animationCurve.Evaluate(Value / maxStatValue);
+        }
+    }
+}

@@ -15,6 +15,7 @@ MonoBehaviour:
   map: {fileID: 0}
   possibleEnemys:
   - {fileID: 11400000, guid: 19d10f08bd6224644b635671e541ee1c, type: 2}
+  - {fileID: 11400000, guid: faa609eded9371c45bbe398491e094b4, type: 2}
   minRank: 1
   maxRank: 2
   possibleEquipments: []
