@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicianCombatSystem : CombatSystem
+public class RangeCombatSystem : CombatSystem, IRangeAttack
 {
     [SerializeField] private int level = 1;
 
@@ -12,10 +12,10 @@ public class MagicianCombatSystem : CombatSystem
     private float offsetBullet = 0.6f;
     private float startOffset;
 
-    [SerializeField] private float speedBullet;
-    [SerializeField] private float lifeTimeBullet;
-    public float SpeedBullet => speedBullet;
-    public float LifeTimeBullet => lifeTimeBullet;
+    [SerializeField] private FloatStat speedBullet;
+    [SerializeField] private FloatStat lifeTimeBullet;
+    public FloatStat SpeedBullet => speedBullet;
+    public FloatStat LifeTimeBullet => lifeTimeBullet;
     private void Start()
     {
         

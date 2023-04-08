@@ -8,12 +8,13 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private Image fillImage;
 
-    private void Start()
+    public void Init(Health health, Color color)
     {
         if (health != null)
         {
             health.changedHP += ShowHealth;
         }
+        fillImage.color = color;
     }
     private void ShowHealth()
     {

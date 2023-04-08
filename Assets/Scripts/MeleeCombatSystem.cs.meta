@@ -3,7 +3,9 @@ guid: a9b9f05621f310e439b127cfda197fb7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - animator: {instanceID: 0}
+  - attackSpeedCurve: {fileID: 11400000, guid: 30f32c3649e8b2b4e99c337ba56c377e, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

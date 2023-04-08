@@ -14,7 +14,8 @@ public class Health : MonoBehaviour
 
     [SerializeField] private float healthPoint;
     [SerializeField] private float maxHealthPoint;
-
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private Color colorTeem;
     public float MaxHP => maxHealthPoint;
     public float HP => healthPoint;
 
@@ -36,8 +37,9 @@ public class Health : MonoBehaviour
         diedEvent?.Invoke();
         Destroy(gameObject);
     }
-    public virtual void InitializeStat(Character character)
+    public virtual void InitializeStat(Character character, Color color)
     {
-
+        colorTeem = color;
+        healthBar.Init(this, color);
     }
 }

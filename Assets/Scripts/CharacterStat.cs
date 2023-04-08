@@ -50,23 +50,19 @@ public class FloatStat
 public class CurveStat: FloatStat
 {
     [SerializeField] private AnimationCurve animationCurve;
-    [SerializeField] private float maxStatValue;
-    [SerializeField] private float maxCurveValue;
-    public CurveStat(float baseValue, AnimationCurve animationCurve, float maxStatValue, float maxCurveValue) :base(baseValue)
+    public CurveStat(float baseValue, AnimationCurve animationCurve) :base(baseValue)
     {
         this.animationCurve = animationCurve;
-        this.maxStatValue = maxStatValue;
-        this.maxCurveValue = maxCurveValue;
     }
     public float GetCurveValue()
     {
-        if (Value >= maxStatValue)
+        if (Value >= animationCurve.keys[animationCurve.keys.Length - 1].time)
         {
-            return maxCurveValue;
+            return animationCurve.keys[animationCurve.keys.Length - 1].value;
         }
         else
         {
-            return animationCurve.Evaluate(Value / maxStatValue);
+            return animationCurve.Evaluate(Value);
         }
     }
 }

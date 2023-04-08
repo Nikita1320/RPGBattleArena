@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: newBattleArenaData
   m_EditorClassIdentifier: 
   map: {fileID: 0}
+  numberEnemy: 3
   possibleEnemys:
   - {fileID: 11400000, guid: 19d10f08bd6224644b635671e541ee1c, type: 2}
-  - {fileID: 11400000, guid: faa609eded9371c45bbe398491e094b4, type: 2}
   minRank: 1
   maxRank: 2
   possibleEquipments: []
@@ -23,10 +23,23 @@ MonoBehaviour:
   maxLevelUpgradeStatsEquipmment: 0
   minLevelImprovePerkEquipmment: 0
   maxLevelImprovePerkEquipmment: 0
-  battleRewards:
+  battleRewardsForPassing:
+  - resourceType: 0
+    minAmmount: 1
+    maxAmmount: 2
   - resourceType: 1
-    minAmmount: 100
-    maxAmmount: 500
+    minAmmount: 500
+    maxAmmount: 1000
+  - resourceType: 2
+    minAmmount: 10
+    maxAmmount: 25
+  battleRewardsForSecondaryPassing:
   - resourceType: 0
     minAmmount: 0
-    maxAmmount: 3
+    maxAmmount: 0
+  - resourceType: 1
+    minAmmount: 50
+    maxAmmount: 200
+  - resourceType: 2
+    minAmmount: 1
+    maxAmmount: 5

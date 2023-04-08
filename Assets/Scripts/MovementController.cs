@@ -11,7 +11,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Coroutine rotateToCoroutine;
     [SerializeField] private bool iHavePath;
-    public bool isMoving => navMeshAgent.hasPath;
+    public bool IsMoving => navMeshAgent.hasPath;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isMoving", IsMoving);
         }
         if (navMeshAgent.remainingDistance <= 0.1)
         {
@@ -55,7 +55,6 @@ public class MovementController : MonoBehaviour
             StopCoroutine(rotateToCoroutine);
         }
         rotateToCoroutine = StartCoroutine(RotateTo());*/
-        Debug.Log(targetPosition);
 
         //Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotateSpeed.Value * Time.deltaTime, 0.0f);
         //transform.rotation = Quaternion.LookRotation(newDirection);

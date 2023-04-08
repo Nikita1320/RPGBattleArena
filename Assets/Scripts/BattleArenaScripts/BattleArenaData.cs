@@ -6,7 +6,7 @@ using UnityEngine;
 public class BattleArenaData : ScriptableObject
 {
     [SerializeField] private GameObject map;
-
+    [SerializeField] private int numberEnemy;
     [Header("SettingsPossibleCharacters")]
     [SerializeField] private CharacterData[] possibleEnemys;
     [SerializeField] private int minRank;
@@ -19,9 +19,11 @@ public class BattleArenaData : ScriptableObject
     [SerializeField] private int minLevelImprovePerkEquipmment;
     [SerializeField] private int maxLevelImprovePerkEquipmment;
 
-    [SerializeField] private BattleReward[] battleRewards;
+    [SerializeField] private BattleReward[] battleRewardsForPassing;
+    [SerializeField] private BattleReward[] battleRewardsForSecondaryPassing;
 
     public GameObject Map => map;
+    public int NumberOfEnemy => numberEnemy;
     public CharacterData[] PossibleEnemys => possibleEnemys;
     public int MinRank => minRank;
     public int MaxRank => maxRank;
@@ -31,5 +33,6 @@ public class BattleArenaData : ScriptableObject
     public int MaxLevelUpgradeStatsEquipmment => maxLevelUpgradeStatsEquipmment;
     public int MinLevelImprovePerkEquipmment => minLevelImprovePerkEquipmment;
     public int MaxLevelImprovePerkEquipmment => maxLevelImprovePerkEquipmment;
-    public BattleReward[] BattleRewards => battleRewards;
+    public BattleReward[] BattleRewardsForPassing => battleRewardsForPassing;
+    public BattleReward[] BattleRewardsForSecondaryPassing => battleRewardsForSecondaryPassing;
 }

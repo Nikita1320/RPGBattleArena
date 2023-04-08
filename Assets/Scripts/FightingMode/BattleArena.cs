@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class BattleArena : MonoBehaviour
 {
+    [SerializeField] private TeemsManager teemsManager;
     [SerializeField] private BattleArenaData battleArenaData;
+    [SerializeField] private TypePassingLevel typePassingLevel;
     [SerializeField] private InputController inputController;
     [SerializeField] private List<CharacterBehaviour> enemyBehaviours;
     [SerializeField] private Health playerCharacter;
     [SerializeField] private List<Health> enemyes = new();
 
     [Header("SpawnCharactersSettings")]
-    [SerializeField] private int countEnemy;
     [SerializeField] private List<Vector3> spawnPoints;
     private List<Vector3> freeSpawnPoints;
 
@@ -27,21 +28,27 @@ public class BattleArena : MonoBehaviour
     [SerializeField] private RewardsPanel rewardsPanel;
     [SerializeField] private List<ResourceRewardCell> rewardCells = new();
 
-    private void Awake()
+    private void Start()
     {
-        countEnemy = 3;
+        teemsManager = TeemsManager.Instance;
+
         freeSpawnPoints = spawnPoints;
+
         battleArenaData = BattleArenaMenu.SelectedBattleArenaData;
+        typePassingLevel = BattleArenaMenu.TypeCurrentPassingLevel;
 
         var playerGameobject = SpawnCharacter(CharactersManager.Instance.SelectedCharacter);
         playerGameobject.GetComponent<MovementController>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
         playerGameobject.GetComponent<CombatSystem>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
-        playerGameobject.GetComponent<Health>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
-        playerGameobject.GetComponent<Health>().diedEvent += DeathPlayer;
+        var playerHealth = playerGameobject.GetComponent<Health>();
+        teemsManager.AddCharacterToTeem(playerGameobject, Color.green);
+        playerHealth.InitializeStat(CharactersManager.Instance.SelectedCharacter, Color.green);
+        playerHealth.diedEvent += DeathPlayer;
+
         inputController.Init(playerGameobject);
 
         Debug.Log("InstancePlayer");
-        for (int i = 0; i < countEnemy; i++)
+        for (int i = 0; i < battleArenaData.NumberOfEnemy; i++)
         {
             var enemy = new Character(battleArenaData.PossibleEnemys[Random.Range(0, battleArenaData.PossibleEnemys.Length)],
             Random.Range(battleArenaData.MinRank, battleArenaData.MaxRank));
@@ -53,7 +60,8 @@ public class BattleArena : MonoBehaviour
             enemyGameobject.GetComponent<CombatSystem>().InitializeStat(enemy);
             //enemyGameobject.GetComponent<EffectManager>().InitializeStat(enemy);
             var health = enemyGameobject.GetComponent<Health>();
-            health.InitializeStat(enemy);
+            teemsManager.AddCharacterToTeem(enemyGameobject, Color.red);
+            health.InitializeStat(enemy, Color.red);
             health.diedEvent += () => 
             {
                 enemyes.Remove(health);
@@ -144,15 +152,30 @@ public class BattleArena : MonoBehaviour
     private void GetReward()
     {
         List<ResourceReward> resourceRewards = new();
-        foreach (var item in battleArenaData.BattleRewards)
+        if (typePassingLevel == TypePassingLevel.Primary)
         {
-            var randomValue = Random.Range(item.MinAmmount, item.MaxAmmount);
-            if (randomValue > 0)
+            foreach (var item in battleArenaData.BattleRewardsForPassing)
             {
-                resourceRewards.Add(new ResourceReward(item.ResourceType, randomValue));
+                var randomValue = Random.Range(item.MinAmmount, item.MaxAmmount);
+                if (randomValue > 0)
+                {
+                    resourceRewards.Add(new ResourceReward(item.ResourceType, randomValue));
+                }
             }
+            rewardsPanel.OpenRewardPanel(resourceRewards: resourceRewards.ToArray());
         }
-        rewardsPanel.OpenRewardPanel(resourceRewards: resourceRewards.ToArray());
+        else
+        {
+            foreach (var item in battleArenaData.BattleRewardsForSecondaryPassing)
+            {
+                var randomValue = Random.Range(item.MinAmmount, item.MaxAmmount);
+                if (randomValue > 0)
+                {
+                    resourceRewards.Add(new ResourceReward(item.ResourceType, randomValue));
+                }
+            }
+            rewardsPanel.OpenRewardPanel(resourceRewards: resourceRewards.ToArray());
+        }
     }
     private void Loose()
     {

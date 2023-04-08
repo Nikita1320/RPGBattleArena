@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum StateBattleArenaLevel
+{
+    Passed,
+    Current,
+    Close
+}
 public class BattleArenaDescriptionCell : MonoBehaviour
 {
     [SerializeField] private BattleArenaData battleArenaData;
@@ -19,8 +25,11 @@ public class BattleArenaDescriptionCell : MonoBehaviour
     [SerializeField] private GameObject passedPanel;
     [SerializeField] private GameObject closePanel;
     [SerializeField] private Text closeText;
+    [SerializeField] private Text typeRewardForPassing;
+    private StateBattleArenaLevel state;
     private bool levelIsOpen = false;
     private int countLevel;
+    public StateBattleArenaLevel State => state;
     public bool isOpen => levelIsOpen;
     public BattleArenaData BattleArenaData => battleArenaData;
     public Button CellButton => cellButton;
@@ -28,19 +37,37 @@ public class BattleArenaDescriptionCell : MonoBehaviour
     {
         cellButton = GetComponent<Button>();
     }
-    public void Init(BattleArenaData battleArenaData, int countLevel)
+    public void Init(BattleArenaData battleArenaData, int countLevel, StateBattleArenaLevel state)
     {
         this.battleArenaData = battleArenaData;
         this.countLevel = countLevel;
+        this.state = state;
         countLevelText.text = "Level: " + countLevel;
         closeText.text = $"complete {countLevel - 1} level";
         foreach (var item in battleArenaData.PossibleEnemys)
         {
             InstantiateEnemyCell(item);
         }
-        foreach (var item in battleArenaData.BattleRewards)
+        if (state == StateBattleArenaLevel.Passed)
         {
-            InstantiateRewardCell(item);
+            PassLevel();
+            typeRewardForPassing.text = "Reward For Secondary Passing:";
+            foreach (var item in battleArenaData.BattleRewardsForSecondaryPassing)
+            {
+                InstantiateRewardCell(item);
+            }
+        }
+        else
+        {
+            if (state == StateBattleArenaLevel.Close)
+                Close();
+            if (state == StateBattleArenaLevel.Current)
+                Open();
+            typeRewardForPassing.text = "Reward For Promary Passing:";
+            foreach (var item in battleArenaData.BattleRewardsForPassing)
+            {
+                InstantiateRewardCell(item);
+            }
         }
     }
     private void InstantiateEnemyCell(CharacterData characterData)

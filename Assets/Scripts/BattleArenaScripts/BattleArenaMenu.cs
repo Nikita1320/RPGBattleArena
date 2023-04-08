@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public enum TypePassingLevel
+{
+    Primary,
+    Secondary
+}
 public class BattleArenaMenu : MonoBehaviour
 {
     [SerializeField] private GameObject battleArenaDescriptionCellConteiner;
@@ -22,25 +27,26 @@ public class BattleArenaMenu : MonoBehaviour
 
     private Coroutine scrollCoroutine;
     private static BattleArenaData selectedBattleArenaData;
+    private static TypePassingLevel typeCurrentPassingLevel;
     private static int levelPassed = 0;
+    public static TypePassingLevel TypeCurrentPassingLevel => typeCurrentPassingLevel;
     public static BattleArenaData SelectedBattleArenaData => selectedBattleArenaData;
     private void Start()
     {
         for (int i = 0; i < arenaDatas.Length; i++)
         {
             var cell = Instantiate(prefab, battleArenaDescriptionCellConteiner.transform);
-            cell.Init(arenaDatas[i], i);
             if (i < levelPassed)
             {
-                cell.PassLevel();
+                cell.Init(arenaDatas[i], i, StateBattleArenaLevel.Passed);
             }
             else if (i == levelPassed)
             {
-                cell.Open();
+                cell.Init(arenaDatas[i], i, StateBattleArenaLevel.Current);
             }
             else
             {
-                cell.Close();
+                cell.Init(arenaDatas[i], i, StateBattleArenaLevel.Close);
             }
             cells.Add(cell);
             cell.CellButton.onClick.AddListener(() => SelectCell(cell));
@@ -63,6 +69,10 @@ public class BattleArenaMenu : MonoBehaviour
         }
         selectedCell = descriptionCell;
         selectedBattleArenaData = selectedCell.BattleArenaData;
+        if (selectedCell.State == StateBattleArenaLevel.Passed)
+            typeCurrentPassingLevel = TypePassingLevel.Secondary;
+        else
+            typeCurrentPassingLevel = TypePassingLevel.Primary;
 
         var positionInHierarchy = selectedCell.transform.GetSiblingIndex();
 

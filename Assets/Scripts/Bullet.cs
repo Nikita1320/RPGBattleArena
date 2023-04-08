@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public delegate void CollisionWithEnemy();
     public CollisionWithEnemy collisionWithEnemy;
 
-    private MagicianCombatSystem magicianCombatSystem;
+    private RangeCombatSystem magicianCombatSystem;
     private bool isInit = false;
     private float lifeTime = 0;
     private List<Health> allies;
@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         if (isInit)
         {
-            transform.position += transform.forward * magicianCombatSystem.SpeedBullet * Time.deltaTime;
+            transform.position += transform.forward * magicianCombatSystem.SpeedBullet.Value * Time.deltaTime;
             lifeTime -= Time.deltaTime;
             if (lifeTime <= 0)
             {
@@ -28,10 +28,10 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void Init(MagicianCombatSystem magicianCombatSystem)
+    public void Init(RangeCombatSystem magicianCombatSystem)
     {
         this.magicianCombatSystem = magicianCombatSystem;
-        lifeTime = magicianCombatSystem.LifeTimeBullet;
+        lifeTime = magicianCombatSystem.LifeTimeBullet.Value;
         allies = new List<Health>(magicianCombatSystem.Allies);
         isInit = true;
     }

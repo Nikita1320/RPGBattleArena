@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 657
     y: -358
     width: 1935
-    height: 2240
+    height: 2400
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2028,7 +2028,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614690}
   - {fileID: 8926484042661614697}
   - {fileID: 8926484042661614718}
-  m_UIPosition: {x: 2168, y: 1319}
+  m_UIPosition: {x: 2168, y: 1479}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2093,7 +2093,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"830884c18cf5e7a4895ee02c2dcd8e12","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"177d9273b2a569e4f9b6b66122a980f2","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mainTexture
@@ -2187,7 +2187,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":5.0,"y":5.0,"z":5.0}'
+      m_SerializableObject: '{"x":3.0,"y":3.0,"z":3.0}'
     m_Space: 2147483647
   m_Property:
     name: Scale
@@ -3113,7 +3113,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":-0.02500152587890625,"value":0.101409912109375,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.945831298828125,"value":0.25,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.004665374755859375,"value":0.3466796875,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.992950439453125,"value":1.002349853515625,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -3175,7 +3175,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 5
+      m_SerializableObject: 15
     m_Space: 2147483647
   m_Property:
     name: A
@@ -3209,7 +3209,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 7
+      m_SerializableObject: 20
     m_Space: 2147483647
   m_Property:
     name: B
@@ -3329,7 +3329,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":0.0},{"color":{"r":0.5,"g":0.5,"b":0.5,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.1568627506494522,"time":0.1882352977991104},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":0.0},{"color":{"r":0.5,"g":0.5,"b":0.5,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.1568627506494522,"time":0.1911802887916565},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: Color
@@ -3507,7 +3507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
   m_UICollapsed: 1
@@ -3570,7 +3570,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Plane, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"position":{"x":0.0,"y":1.75,"z":0.0},"normal":{"x":0.0,"y":-1.0,"z":0.0}}'
+      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":0.0},"normal":{"x":0.0,"y":0.0,"z":1.0}}'
     m_Space: 1
   m_Property:
     name: Plane
@@ -3598,7 +3598,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614709}
   - {fileID: 8926484042661614710}
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614706}
   m_MasterData:
@@ -3733,7 +3733,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614713}
   - {fileID: 8926484042661614714}
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614706}
   m_MasterData:

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightCombatSystem : CombatSystem
+public class MeleeCombatSystem : CombatSystem, IMeleeAttack
 {
     [SerializeField] private FloatStat radiusAttack;
     [SerializeField] private FloatStat rangeAttack;
     private Collider[] damagableObject;
-
     public FloatStat RangeAttack => rangeAttack;
     public FloatStat RadiusAttack => radiusAttack;
     public override bool Attack()

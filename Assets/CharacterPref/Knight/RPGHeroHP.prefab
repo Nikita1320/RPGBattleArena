@@ -1120,6 +1120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoint: 0
   maxHealthPoint: 500
+  healthBar: {fileID: 1841220424088586353}
+  colorTeem: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4793914266666037692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1179,82 +1181,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b9f05621f310e439b127cfda197fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   damagableLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 520
   allies: []
   attackSpeed:
-    baseValue: 2
+    baseValue: 0
     increseValueByLevel: 0
     valueUpgrade: 0
-    coefficientUpgrade: 1
+    coefficientUpgrade: 0
     animationCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 5
-        inSlope: -0.9949651
-        outSlope: -0.9949651
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.14076535
-      - serializedVersion: 3
-        time: 1
-        value: 0.3
-        inSlope: -10.244369
-        outSlope: -10.244369
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.030036151
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    maxStatValue: 0
-    maxCurveValue: 0
   damage:
-    baseValue: 35
+    baseValue: 0
     increseValueByLevel: 0
     valueUpgrade: 0
-    coefficientUpgrade: 1
-  attackSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 5
-      inSlope: -0.9949651
-      outSlope: -0.9949651
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.14076535
-    - serializedVersion: 3
-      time: 1
-      value: 0.3
-      inSlope: -10.244369
-      outSlope: -10.244369
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.030036151
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  animator: {fileID: 4887442902586164500}
+    coefficientUpgrade: 0
   currentTimeToReadyattack: 0
+  attackSpeedCurve: {fileID: 11400000, guid: 30f32c3649e8b2b4e99c337ba56c377e, type: 2}
   radiusAttack:
-    baseValue: 1
+    baseValue: 0
     increseValueByLevel: 0
     valueUpgrade: 0
-    coefficientUpgrade: 1
+    coefficientUpgrade: 0
   rangeAttack:
-    baseValue: 2
+    baseValue: 0
     increseValueByLevel: 0
     valueUpgrade: 0
-    coefficientUpgrade: 1
+    coefficientUpgrade: 0
 --- !u!114 &4793914266666037664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,9 +1228,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementController: {fileID: 4793914266666037692}
   combatSystem: {fileID: 4793914266666037695}
+  currentTargetEnemy: {fileID: 0}
+  searchRadiusPoint: 10
+  searchRadiusEnemy: 10
+  radiusEndPursuit: 15
+  currentStateCharacter: 0
   angularAttack: 10
   damagableObject: []
-  target: {fileID: 0}
+  timePursuit: 10
 --- !u!114 &-2965948289276639820
 MonoBehaviour:
   m_ObjectHideFlags: 0

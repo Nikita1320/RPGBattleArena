@@ -3,20 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IMeleeAttack
+{
+    public FloatStat RangeAttack { get; }
+    public FloatStat RadiusAttack { get; }
+}
+public interface IRangeAttack
+{
+    public FloatStat SpeedBullet { get; }
+    public FloatStat LifeTimeBullet { get; }
+}
 public abstract class CombatSystem : MonoBehaviour
 {
     public delegate void Attacked();
     public Attacked attacked;
 
+    [SerializeField] protected Animator animator;
     [SerializeField] protected LayerMask damagableLayer = 9;
     [SerializeField] protected List<Health> allies;
     [SerializeField] protected CurveStat attackSpeed;
     [SerializeField] protected FloatStat damage;
-    [SerializeField] private AnimationCurve attackSpeedCurve;
-    [SerializeField] protected Animator animator;
     [SerializeField] protected float currentTimeToReadyattack = 0;
-    private float maxStatValue = 1000;
-    private float maxCurveValue = 0.3f;
+
+    [Header("SettingsAttackSpeedCurve")]
+    [SerializeField] internal AnimationCurveData attackSpeedCurve;
+
     protected bool mayAttack = true;
     protected bool isAttacking = false;
     public bool MayAttack => mayAttack;
@@ -28,6 +39,7 @@ public abstract class CombatSystem : MonoBehaviour
     private void Start()
     {
         allies.Add(GetComponent<Health>());
+        animator = GetComponent<Animator>();
     }
     public void Update()
     {
@@ -44,7 +56,7 @@ public abstract class CombatSystem : MonoBehaviour
     public virtual void InitializeStat(Character character)
     {
         damage = new FloatStat(character.Stats[TypeStat.Damage].Value);
-        attackSpeed = new CurveStat(character.Stats[TypeStat.AttackSpeed].Value, attackSpeedCurve, maxStatValue, maxCurveValue);
+        attackSpeed = new CurveStat(character.Stats[TypeStat.AttackSpeed].Value, attackSpeedCurve.GetCurve);
     }
     public void AddAllies(Health ally)
     {
