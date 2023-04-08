@@ -25,12 +25,12 @@ public class EquipmentSelectionPanel : MonoBehaviour
     [SerializeField] private EquipmentCell prefabEquipmentCell;
     [SerializeField] private Button[] equipmentButton;
 
-    private void Awake()
+    private void Start()
     {
         gameObject.SetActive(false);
         inventory = Inventory.Instance;
-        InstanceEquipmentCells();
         inventory.AddedEquipmentEvent += AddEquipmentCell;
+        InstanceEquipmentCells();
     }
     public void Init(Character _character)
     {
@@ -86,6 +86,8 @@ public class EquipmentSelectionPanel : MonoBehaviour
     }
     private void AddEquipmentCell(Equipment equipment)
     {
+        Debug.Log("!!!!!!!!!!");
+        Debug.Log(equipment);
         if (equipment.EquipmentData.EquipmentType == TypeEquipment.Hand)
         {
             var cell = Instantiate(prefabEquipmentCell, handListItemsPanel.transform);
@@ -211,8 +213,19 @@ public class EquipmentSelectionPanel : MonoBehaviour
         character.RemoveEquipment(removedEquipment);
         clothedEquipment = null;
     }
+    private void OnEnable()
+    {
+
+    }
     private void OnDisable()
     {
-        gameObject.SetActive(false);
+
+    }
+    private void OnDestroy()
+    {
+        if (inventory != null)
+        {
+            inventory.AddedEquipmentEvent -= AddEquipmentCell;
+        }
     }
 }

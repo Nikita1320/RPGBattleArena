@@ -12,10 +12,10 @@ public class Inventory : MonoBehaviour
 {
     private static Inventory instance;
 
-    private AddedEquipment addedEquipmentEvent;
-    private AddedCard addedCardtEvent;
-    private RemovedEquipment removedEquipmentEvent;
-    private RemovedCard removedCardEvent;
+    public AddedEquipment AddedEquipmentEvent;
+    public AddedCard AddedCardtEvent;
+    public RemovedEquipment RemovedEquipmentEvent;
+    public RemovedCard RemovedCardEvent;
 
     [SerializeField] private List<Equipment> equipments;
     [SerializeField] private List<CharacterCard> cards;
@@ -23,10 +23,6 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance => instance;
     public Equipment[] Equipments => equipments.ToArray();
     public CharacterCard[] CharacterCards => cards.ToArray();
-    public AddedCard AddedCardtEvent { get { return addedCardtEvent; } set { if (value != null) { addedCardtEvent += value; } } }
-    public AddedEquipment AddedEquipmentEvent { get { return addedEquipmentEvent; } set { if(value != null) { addedEquipmentEvent += value; } } }
-    public RemovedEquipment RemovedEquipmentEvent { get { return removedEquipmentEvent; } set { if (value != null) { removedEquipmentEvent += value; } } }
-    public RemovedCard RemovedCardEvent { get { return removedCardEvent; } set { if (value != null) { removedCardEvent += value; } } }
 
     private void Awake()
     {
@@ -48,7 +44,7 @@ public class Inventory : MonoBehaviour
     public void AddItem(Equipment newEquipment)
     {
         equipments.Add(newEquipment);
-        addedEquipmentEvent?.Invoke(newEquipment);
+        AddedEquipmentEvent?.Invoke(newEquipment);
     }
     public void AddItem(CharacterCard newCharacterCard)
     {
@@ -59,7 +55,7 @@ public class Inventory : MonoBehaviour
         else
         {
             cards.Add(newCharacterCard);
-            addedCardtEvent?.Invoke(newCharacterCard);
+            AddedCardtEvent?.Invoke(newCharacterCard);
         }
     }
     public bool FindCard(CharacterCardData characterCardData, out CharacterCard characterCard)
@@ -77,7 +73,7 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveCardItem(CharacterCard characterCard)
     {
-        removedCardEvent?.Invoke(characterCard);
+        RemovedCardEvent?.Invoke(characterCard);
         cards.Remove(characterCard);
     }
     public void RemoveEquipment(Equipment removeEquipment)
@@ -86,7 +82,7 @@ public class Inventory : MonoBehaviour
         {
             removeEquipment.Owner.RemoveEquipment(removeEquipment);
         }
-        removedEquipmentEvent?.Invoke(removeEquipment);
+        RemovedEquipmentEvent?.Invoke(removeEquipment);
         removeEquipment.removingEvent?.Invoke();
         equipments.Remove(removeEquipment);
     }

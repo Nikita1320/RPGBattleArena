@@ -109,4 +109,12 @@ public class InventoryMenu : MonoBehaviour
         characterCardCells.Remove(characterCardCell);
         Destroy(characterCardCell.gameObject);
     }
+    private void OnDisable()
+    {
+        if (inventory != null)
+        {
+            inventory.AddedEquipmentEvent -= InstantiateEquipmentCell;
+            inventory.AddedCardtEvent -= InstantiateCardCell;
+        }
+    }
 }
