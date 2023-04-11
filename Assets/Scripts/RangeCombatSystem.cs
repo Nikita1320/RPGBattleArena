@@ -23,10 +23,10 @@ public class RangeCombatSystem : CombatSystem, IRangeAttack
     public override bool Attack()
     {
         Debug.Log("TryAttack");
-        if (currentTimeToReadyattack == 0)
+        if (currentTimeToReadyAttack == 0)
         {
             isAttacking = true;
-            currentTimeToReadyattack = attackSpeed.Value;
+            currentTimeToReadyAttack = attackSpeed.Value;
             mayAttack = false;
             animator.SetTrigger("Attack");
             return true;

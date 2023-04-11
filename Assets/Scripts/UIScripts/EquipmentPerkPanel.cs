@@ -37,4 +37,11 @@ public class EquipmentPerkPanel : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        if (equipment != null)
+        {
+            equipment.improvedPerkEvent -= RenderPerkInfo;
+        }
+    }
 }

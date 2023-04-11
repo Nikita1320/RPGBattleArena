@@ -156,16 +156,7 @@ public class UpgradeCharacterPanel : MonoBehaviour
     }
     private void OnDisable()
     {
-        currentAmmountCardSelected = 0;
-
-        if (neededCardToUpgradeCharacterRank != null)
-        {
-            upAmmountButton.interactable = true;
-            downAmmountButton.interactable = false;
-
-            characterCardCell.AmmountText.text = neededCardToUpgradeCharacterRank.Ammount.ToString();
-        }
-        upgradeImage.gameObject.SetActive(false);
+        ResetPanel();
     }
     private void SetEmptySlot(CharacterCardData cardData)
     {
@@ -183,5 +174,18 @@ public class UpgradeCharacterPanel : MonoBehaviour
             upAmmountButton.interactable = true;
             downAmmountButton.interactable = false;
         }
+    }
+    public void ResetPanel()
+    {
+        currentAmmountCardSelected = 0;
+
+        if (neededCardToUpgradeCharacterRank != null)
+        {
+            upAmmountButton.interactable = true;
+            downAmmountButton.interactable = false;
+
+            characterCardCell.AmmountText.text = neededCardToUpgradeCharacterRank.Ammount.ToString();
+        }
+        upgradeImage.gameObject.SetActive(false);
     }
 }

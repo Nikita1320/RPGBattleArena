@@ -6,6 +6,10 @@ public class SmthPassiveAbility1 : PassiveAbility
 {
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+
+    }
+    public override void DisActivate()
+    {
+
     }
 }

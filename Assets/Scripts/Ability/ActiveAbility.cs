@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class ActiveAbility : Ability
 {
-    public override int MaxLevel => 5;
-    public abstract void Use();
+    [SerializeField] protected bool mayUse = true;
+    public bool MayUse => mayUse;
+    public abstract bool Use();
 }

@@ -49,6 +49,7 @@ public class AbilityTreeMenu : MonoBehaviour
     }
     private void InitializeAbilityCell()
     {
+        Debug.Log(character.Rank);
         if (branchs.Count == 0)
         {
             Init();
@@ -63,6 +64,7 @@ public class AbilityTreeMenu : MonoBehaviour
 
         if (character.Rank >= character.AbilityTree.OpenBranchRanks[2])
         {
+            Debug.Log("OpenAllBranch");
             for (int i = 0; i < branchs.Count; i++)
             {
                 for (int j = 0; j < branchs[i].Length; j++)
@@ -81,6 +83,7 @@ public class AbilityTreeMenu : MonoBehaviour
         }
         else if (character.Rank >= character.AbilityTree.OpenBranchRanks[1])
         {
+            Debug.Log("Open 1 and 2");
             for (int i = 0; i < branchs.Count - 1; i++)
             {
                 for (int j = 0; j < branchs[i].Length; j++)
@@ -99,6 +102,7 @@ public class AbilityTreeMenu : MonoBehaviour
         }
         else if(character.Rank >= character.AbilityTree.OpenBranchRanks[0])
         {
+            Debug.Log("Open 1");
             for (int i = 0; i < branchs.Count - 2; i++)
             {
                 for (int j = 0; j < branchs[i].Length; j++)
@@ -136,55 +140,53 @@ public class AbilityTreeMenu : MonoBehaviour
     }
     private void RenderDescription()
     {
+        improveButton.interactable = false;
+
         abilityDescription.Init(selectedAbilityCell.Ability, 
             character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability]);
         abilityDescription.gameObject.SetActive(false);
         abilityDescription.gameObject.SetActive(true);
 
+        if (selectedAbilityCell.IsLock)
+        {
+            improveButton.interactable = false;
+            return;
+        }
 
         if (character.AbilityTree.FreePoints == 0)
         {
             improveButton.interactable = false;
             return;
         }
-        else
+
+        if (selectedAbilityCell.Ability == branchs[bracnhSelectedAbility][0].Ability)
         {
-            if (character.AbilityTree.FreePoints > 0)
-            {
-                improveButton.interactable = true;
-            }
-            else
+            Debug.Log("Its Active Ability");
+            if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == character.AbilityTree.MaxLevelActiveAbility)
             {
                 improveButton.interactable = false;
                 return;
             }
         }
-
-        if (selectedAbilityCell.Ability == branchs[bracnhSelectedAbility][0].Ability)
-        {
-            if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == character.AbilityTree.MaxLevelActiveAbility)
-            {
-                improveButton.interactable = false;
-            }
-        }
         else
         {
+            Debug.Log("Its Passive Ability");
             if (character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability] == character.AbilityTree.MaxLevelPassiveAbility)
             {
                 improveButton.interactable = false;
+                return;
             }
             else
             {
-                if (((character.AbilityTree.StepImprovedPassiveAbility + character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability]) >= character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability]) && character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability] > 0)
-                {
-                    improveButton.interactable = true;
-                }
-                else
+                if (!((character.AbilityTree.StepImprovedPassiveAbility + character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability]) >= character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[selectedAbilityCell.Ability]
+                    && character.AbilityTree.AbilityBranches[bracnhSelectedAbility].ImprovmentAbility[branchs[bracnhSelectedAbility][0].Ability] > 0))
                 {
                     improveButton.interactable = false;
+                    return;
                 }
             }
         }
+        improveButton.interactable = true;
     }
     private void OnDisable()
     {

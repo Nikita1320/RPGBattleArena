@@ -7,7 +7,6 @@ public class CharactersPanel : MonoBehaviour
 {
     [SerializeField] private CharacterInformationPanel informationPanel;
     [SerializeField] private Button selectedCharacterButton;
-    [SerializeField] private EquipmentSelectionPanel equipmentSelectionPanel;
     
     [SerializeField] private Transform spawnPoint;
 
@@ -101,5 +100,12 @@ public class CharactersPanel : MonoBehaviour
     {
         charactersManager.SelectCharacter(DemonstrationCharacter);
         Debug.Log("SelectCharacter");
+    }
+    private void OnEnable()
+    {
+        if (selectedCell != null)
+        {
+            informationPanel.Init(selectedCell.Character);
+        }
     }
 }

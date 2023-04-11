@@ -71,18 +71,22 @@ public class AbilityTree
         var openBranch = 0;
         if (character.Rank > OpenBranchRanks[2])
         {
-            openBranch = 3;
+            openBranch = 2;
             maxPointsMayUse = (maxLevelActiveAbility * openBranch + maxLevelPassiveAbility * openBranch * 2);
         }
         else if (character.Rank > OpenBranchRanks[1])
         {
-            openBranch = 2;
+            openBranch = 1;
             maxPointsMayUse = (maxLevelActiveAbility * openBranch + maxLevelPassiveAbility * openBranch * 2);
         }
         else if (character.Rank > OpenBranchRanks[0])
         {
-            openBranch = 1;
+            openBranch = 0;
             maxPointsMayUse = (maxLevelActiveAbility * openBranch + maxLevelPassiveAbility * openBranch * 2);
+        }
+        else
+        {
+            return;
         }
 
         var points = FreePoints;
@@ -91,10 +95,11 @@ public class AbilityTree
             points = maxPointsMayUse;
         }
 
-        while (true)
+        while (maxPointsMayUse < 0)
         {
             for (int j = 0; j < openBranch; j++)
             {
+                Debug.Log("TickMain");
                 if (abilityBranches[j].ImprovmentAbility[abilityBranches[j].ActiveAbility] < maxLevelActiveAbility)
                 {
                     abilityBranches[j].ImproveAbility(abilityBranches[j].ActiveAbility);
@@ -107,6 +112,7 @@ public class AbilityTree
                 }
                 for (int l = 0; l < 2; l++)
                 {
+                    Debug.Log("Tick");
                     if (abilityBranches[j].ImprovmentAbility[abilityBranches[j].PassiveAbilitys[l]] < maxLevelPassiveAbility)
                     {
                         abilityBranches[j].ImproveAbility(abilityBranches[j].PassiveAbilitys[l]);

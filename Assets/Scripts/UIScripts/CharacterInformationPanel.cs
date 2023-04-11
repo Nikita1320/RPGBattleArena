@@ -47,10 +47,20 @@ public class CharacterInformationPanel : MonoBehaviour
     {
         upgradeCharacterPanel.Init(character);
     }
-    public void Reset()
+    public void ResetPanel()
     {
-        improvementInformationPanel.gameObject.SetActive(true);
-        statPanel.gameObject.SetActive(false);
-        upgradeCharacterPanel.gameObject.SetActive(false);
+        if (character != null)
+        {
+            Debug.Log("RESETINFORMATIONPANEL");
+            improvementInformationPanel.ResetPanel();
+            statPanel.ResetPanel();
+            upgradeCharacterPanel.ResetPanel();
+            characterInventoryPanel.ResetPanel();
+
+            improvementInformationPanel.gameObject.SetActive(true);
+            statPanel.gameObject.SetActive(false);
+            upgradeCharacterPanel.gameObject.SetActive(false);
+            character = null;
+        }
     }
 }

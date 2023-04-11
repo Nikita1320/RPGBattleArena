@@ -12,10 +12,10 @@ public class MeleeCombatSystem : CombatSystem, IMeleeAttack
     public override bool Attack()
     {
         Debug.Log("TryAttack");
-        if (currentTimeToReadyattack == 0)
+        if (currentTimeToReadyAttack == 0)
         {
             isAttacking = true;
-            currentTimeToReadyattack = attackSpeed.GetCurveValue();
+            currentTimeToReadyAttack = attackSpeed.GetCurveValue();
             mayAttack = false;
             animator.SetTrigger("Attack");
             return true;
@@ -27,7 +27,6 @@ public class MeleeCombatSystem : CombatSystem, IMeleeAttack
     }
     public void GetDamage()
     {
-        Debug.Log("GetDamage");
         Debug.Log(transform.position + transform.forward);
         damagableObject = Physics.OverlapSphere(transform.position + transform.forward, radiusAttack.Value, damagableLayer);
         for (int i = 0; i < damagableObject.Length; i++)
@@ -41,7 +40,6 @@ public class MeleeCombatSystem : CombatSystem, IMeleeAttack
             if (!allies.Contains(damagableObject[i].gameObject))
             {
                 damagableObject[i].gameObject.GetComponent<Health>().TakeDamage(damage.Value);
-                Debug.Log($"GetDamageTo{damagableObject[i].gameObject}");
             }
         }
         isAttacking = false;

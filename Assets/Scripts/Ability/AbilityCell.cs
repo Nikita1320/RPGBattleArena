@@ -10,7 +10,7 @@ public class AbilityCell : MonoBehaviour
     [SerializeField] private Text lockText;
     [SerializeField] private Button cellButton;
     [SerializeField] private Image notActiveImage;
-    private bool isLock;
+    private bool isLock = true;
     [SerializeField] private Ability ability;
     public bool IsLock => isLock;
     public Button CellButton => cellButton;

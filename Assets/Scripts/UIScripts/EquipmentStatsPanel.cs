@@ -53,4 +53,11 @@ public class EquipmentStatsPanel : MonoBehaviour
             statCells[i].Init(equipment.EquipmentData.EquipmentStat[i], equipment.CurrentLevelStats, renderNextLevelStat);
         }
     }
+    private void OnDestroy()
+    {
+        if (equipment != null)
+        {
+            equipment.improvedStatsEvent -= RenderStat;
+        }
+    }
 }

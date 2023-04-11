@@ -40,6 +40,8 @@ public class BattleArena : MonoBehaviour
         var playerGameobject = SpawnCharacter(CharactersManager.Instance.SelectedCharacter);
         playerGameobject.GetComponent<MovementController>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
         playerGameobject.GetComponent<CombatSystem>().InitializeStat(CharactersManager.Instance.SelectedCharacter);
+        playerGameobject.GetComponent<AbilityManager>().SetImprovement(CharactersManager.Instance.SelectedCharacter);
+
         var playerHealth = playerGameobject.GetComponent<Health>();
         teemsManager.AddCharacterToTeem(playerGameobject, Color.green);
         playerHealth.InitializeStat(CharactersManager.Instance.SelectedCharacter, Color.green);
@@ -58,7 +60,9 @@ public class BattleArena : MonoBehaviour
             enemyBehaviours.Add(enemyGameobject.GetComponent<CharacterBehaviour>());
             enemyGameobject.GetComponent<MovementController>().InitializeStat(enemy);
             enemyGameobject.GetComponent<CombatSystem>().InitializeStat(enemy);
-            //enemyGameobject.GetComponent<EffectManager>().InitializeStat(enemy);
+            enemy.AbilityTree.RandomImprove();
+            enemyGameobject.GetComponent<AbilityManager>().SetImprovement(enemy);
+            
             var health = enemyGameobject.GetComponent<Health>();
             teemsManager.AddCharacterToTeem(enemyGameobject, Color.red);
             health.InitializeStat(enemy, Color.red);

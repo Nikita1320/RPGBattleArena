@@ -36,7 +36,6 @@ public abstract class CharacterBehaviour : MonoBehaviour
             yield return new WaitForSeconds(1);
             if (FindTarget())
             {
-                Debug.Log($"EndFindCoroutine target = {currentTargetEnemy}");
                 break;
             }
         }
@@ -47,7 +46,6 @@ public abstract class CharacterBehaviour : MonoBehaviour
 
         direction.z += Random.Range(0, 2);
         direction.x += Random.Range(-3, 4);
-        Debug.Log("strafe");
 
         movementController.Move(transform.position + direction);
     }

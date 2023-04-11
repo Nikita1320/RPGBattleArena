@@ -85,4 +85,12 @@ public class CharacterInventoryPanel : MonoBehaviour
             equipmentCell[(int)typeEquipment].gameObject.SetActive(false);
         }
     }
+    public void ResetPanel()
+    {
+        character.reachedFirstRank -= SetEquipmentForCell;
+        character.equipedItemEvent -= UpdateEquipmendCell;
+        character.removedItemEvent -= UpdateEquipmendCell;
+        character = null;
+        equipmentSelectionPanel.ResetPanel();
+    }
 }

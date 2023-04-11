@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class PassiveAbility : Ability
 {
-    public override int MaxLevel => 3;
+    [SerializeField] private int currentLevel;
     public abstract void Activate();
+    public abstract void DisActivate();
 }

@@ -10,7 +10,7 @@ public class CharactersMenu : MonoBehaviour
     [SerializeField] private List<Camera> sceneCameras;
     private void OnDisable()
     {
-        informationPanel.Reset();
+        informationPanel.ResetPanel();
         equipmentSelectionPanel.gameObject.SetActive(false);
     }
     private void OnEnable()

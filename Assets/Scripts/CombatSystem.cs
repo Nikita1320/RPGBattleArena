@@ -23,7 +23,7 @@ public abstract class CombatSystem : MonoBehaviour
     [SerializeField] protected List<Health> allies;
     [SerializeField] protected CurveStat attackSpeed;
     [SerializeField] protected FloatStat damage;
-    [SerializeField] protected float currentTimeToReadyattack = 0;
+    [SerializeField] protected float currentTimeToReadyAttack = 0;
 
     [Header("SettingsAttackSpeedCurve")]
     [SerializeField] internal AnimationCurveData attackSpeedCurve;
@@ -33,9 +33,10 @@ public abstract class CombatSystem : MonoBehaviour
     public bool MayAttack => mayAttack;
     public bool IsAttacking => isAttacking;
     public FloatStat Damage => damage;
-    public FloatStat AttackSpeed => attackSpeed;
+    public CurveStat AttackSpeed => attackSpeed;
     public Health[] Allies => allies.ToArray();
     public LayerMask DamagableLayer => damagableLayer;
+    public float CurrentTimeToReadyAttack => currentTimeToReadyAttack;
     private void Start()
     {
         allies.Add(GetComponent<Health>());
@@ -43,12 +44,12 @@ public abstract class CombatSystem : MonoBehaviour
     }
     public void Update()
     {
-        if (currentTimeToReadyattack != 0)
+        if (currentTimeToReadyAttack != 0)
         {
-            currentTimeToReadyattack -= Time.deltaTime;
-            if (currentTimeToReadyattack <= 0)
+            currentTimeToReadyAttack -= Time.deltaTime;
+            if (currentTimeToReadyAttack <= 0)
             {
-                currentTimeToReadyattack = 0;
+                currentTimeToReadyAttack = 0;
                 mayAttack = true;
             }
         }

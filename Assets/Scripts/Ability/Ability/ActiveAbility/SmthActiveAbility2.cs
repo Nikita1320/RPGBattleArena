@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SmthActiveAbility2 : ActiveAbility
 {
-    public override void Use()
+    public override bool Use()
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 }

@@ -36,6 +36,8 @@ public class InventoryMenu : MonoBehaviour
 
         inventory.AddedEquipmentEvent += InstantiateEquipmentCell;
         inventory.AddedCardtEvent += InstantiateCardCell;
+        inventory.RemovedEquipmentEvent += RemoveEquipmentCell;
+        inventory.RemovedCardEvent += RemoveCardCell;
     }
     public void InstantiateEquipmentCell(Equipment equipment)
     {
@@ -44,32 +46,24 @@ public class InventoryMenu : MonoBehaviour
             handEquipmentCells.Add(Instantiate(EquipmentCellPrefab, handEquipmentPanel.transform));
             handEquipmentCells[handEquipmentCells.Count - 1].Init(equipment);
             handEquipmentCells[handEquipmentCells.Count - 1].CellButton.onClick.AddListener(() => descriptionPanel.RenderDescription(equipment));
-
-            equipment.removingEvent += () => RemoveEquipmentCell(handEquipmentCells[handEquipmentCells.Count - 1]);
         }
         else if (equipment.EquipmentData.EquipmentType == TypeEquipment.Body)
         {
             bodyEquipmentCells.Add(Instantiate(EquipmentCellPrefab, bodyEquipmentPanel.transform));
             bodyEquipmentCells[bodyEquipmentCells.Count - 1].Init(equipment);
             bodyEquipmentCells[bodyEquipmentCells.Count - 1].CellButton.onClick.AddListener(() => descriptionPanel.RenderDescription(equipment));
-
-            equipment.removingEvent += () => RemoveEquipmentCell(handEquipmentCells[handEquipmentCells.Count - 1]);
         }
         else if (equipment.EquipmentData.EquipmentType == TypeEquipment.Head)
         {
             headEquipmentCells.Add(Instantiate(EquipmentCellPrefab, headEquipmentPanel.transform));
             headEquipmentCells[headEquipmentCells.Count - 1].Init(equipment);
             headEquipmentCells[headEquipmentCells.Count - 1].CellButton.onClick.AddListener(() => descriptionPanel.RenderDescription(equipment));
-
-            equipment.removingEvent += () => RemoveEquipmentCell(handEquipmentCells[handEquipmentCells.Count - 1]);
         }
         else if (equipment.EquipmentData.EquipmentType == TypeEquipment.Foot)
         {
             footEquipmentCells.Add(Instantiate(EquipmentCellPrefab, footEquipmentPanel.transform));
             footEquipmentCells[footEquipmentCells.Count - 1].Init(equipment);
             footEquipmentCells[footEquipmentCells.Count - 1].CellButton.onClick.AddListener(() => descriptionPanel.RenderDescription(equipment));
-
-            equipment.removingEvent += () => RemoveEquipmentCell(handEquipmentCells[handEquipmentCells.Count - 1]);
         }
     }
     public void InstantiateCardCell(CharacterCard characterCard)
@@ -78,43 +72,78 @@ public class InventoryMenu : MonoBehaviour
         characterCardCells[characterCardCells.Count - 1].Init(characterCard);
 
         characterCardCells[characterCardCells.Count - 1].CellButton.onClick.AddListener(() => descriptionPanel.RenderDescription(characterCard));
-
-        characterCardCells[characterCardCells.Count - 1].CharacterCard.removingEvent += () => RemoveCardCell(characterCardCells[characterCardCells.Count - 1]);
     }
-    public void RemoveEquipmentCell(EquipmentCell equipmentCell)
+    public void RemoveEquipmentCell(Equipment equipment)
     {
-        if (equipmentCell.Equipment.EquipmentData.EquipmentType == TypeEquipment.Hand)
+        if (equipment.EquipmentData.EquipmentType == TypeEquipment.Hand)
         {
-            handEquipmentCells.Remove(equipmentCell);
-            Destroy(equipmentCell);
+            foreach (var item in handEquipmentCells)
+            {
+                if (item.Equipment == equipment)
+                {
+                    handEquipmentCells.Remove(item);
+                    Destroy(item.gameObject);
+                    return;
+                }
+            }
         }
-        else if (equipmentCell.Equipment.EquipmentData.EquipmentType == TypeEquipment.Body)
+        else if (equipment.EquipmentData.EquipmentType == TypeEquipment.Body)
         {
-            bodyEquipmentCells.Remove(equipmentCell);
-            Destroy(equipmentCell);
+            foreach (var item in bodyEquipmentCells)
+            {
+                if (item.Equipment == equipment)
+                {
+                    handEquipmentCells.Remove(item);
+                    Destroy(item.gameObject);
+                    return;
+                }
+            }
         }
-        else if (equipmentCell.Equipment.EquipmentData.EquipmentType == TypeEquipment.Head)
+        else if (equipment.EquipmentData.EquipmentType == TypeEquipment.Head)
         {
-            headEquipmentCells.Remove(equipmentCell);
-            Destroy(equipmentCell);
+            foreach (var item in headEquipmentCells)
+            {
+                if (item.Equipment == equipment)
+                {
+                    handEquipmentCells.Remove(item);
+                    Destroy(item.gameObject);
+                    return;
+                }
+            }
         }
-        else if (equipmentCell.Equipment.EquipmentData.EquipmentType == TypeEquipment.Foot)
+        else if (equipment.EquipmentData.EquipmentType == TypeEquipment.Foot)
         {
-            footEquipmentCells.Remove(equipmentCell);
-            Destroy(equipmentCell);
+            foreach (var item in footEquipmentCells)
+            {
+                if (item.Equipment == equipment)
+                {
+                    handEquipmentCells.Remove(item);
+                    Destroy(item.gameObject);
+                    return;
+                }
+            }
         }
     }
-    public void RemoveCardCell(CharacterCardCell characterCardCell)
+    public void RemoveCardCell(CharacterCard characterCard)
     {
-        characterCardCells.Remove(characterCardCell);
-        Destroy(characterCardCell.gameObject);
+        foreach (var item in characterCardCells)
+        {
+            if (item.CharacterCard == characterCard)
+            {
+                characterCardCells.Remove(item);
+                Destroy(item.gameObject);
+                return;
+            }
+        }
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (inventory != null)
         {
             inventory.AddedEquipmentEvent -= InstantiateEquipmentCell;
             inventory.AddedCardtEvent -= InstantiateCardCell;
+            inventory.RemovedEquipmentEvent -= RemoveEquipmentCell;
+            inventory.RemovedCardEvent -= RemoveCardCell;
         }
     }
 }

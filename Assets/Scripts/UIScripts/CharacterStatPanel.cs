@@ -135,7 +135,6 @@ public class CharacterStatPanel : MonoBehaviour
         character.Stats[TypeStat.Health].changedValue -= RederHealthPointStat;
         character.Stats[TypeStat.Armor].changedValue -= RederArmorStat;
         character.Stats[TypeStat.ResistMagic].changedValue -= RederResistMagicStat;
-
         if (character.CharacterData.CharacterStat.GetType() == typeof(RangeCharacterStatData))
         {
             character.Stats[TypeStat.LifeTimeBullet].changedValue -= RederLifeTimeBulletStat;
@@ -146,5 +145,10 @@ public class CharacterStatPanel : MonoBehaviour
             character.Stats[TypeStat.RangeArea].changedValue -= RederRangeAreaStat;
             character.Stats[TypeStat.RangeAttack].changedValue -= RederRangeAttackStat;
         }
+    }
+    public void ResetPanel()
+    {
+        UnSubscribeOnChangedValueStat();
+        character = null;
     }
 }

@@ -55,4 +55,12 @@ public class CharacterImprovementInformationPanel : MonoBehaviour
         currentAmmountRankPoint.text = character.CurrentAmountRankPoint.ToString();
         progressRank.fillAmount = (float)character.CurrentAmountRankPoint / (float)character.CharacterData.CharacterImprovementData.GetPurposePointRank(character.Rank, character.CharacterData.Rarity);
     }
+    public void ResetPanel()
+    {
+        character.raisedLevel -= UpdateLevel;
+        character.raisedRank -= UpdateRank;
+        character.takedXPEvent -= UpdAteCurrentAmmountXP;
+        character.takedRankPointEvent -= UpdateCurrentAmmountRankPoint;
+        character = null;
+    }
 }

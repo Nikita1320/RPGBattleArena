@@ -17,10 +17,49 @@ public class EquipmentCell : ItemCell
     {
         if (equipment != null)
         {
-            equipment.changedOwnerEvent -= UpdateOwnerImage;
+            UnSubscribe();
         }
 
         equipment = _equipment;
+
+        if (equipment != null)
+        {
+            if (gameObject.activeInHierarchy)
+            {
+                RenderInformation();
+                Subscribe();
+            }
+        }
+    }
+    private void UpdateOwnerImage()
+    {
+        if (equipment.Owner == null)
+        {
+            ownerPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            ownerPanel.gameObject.SetActive(true);
+            ownerImage.sprite = equipment.Owner.CharacterData.SpriteCharacter;
+        }
+    }
+    private void OnEnable()
+    {
+        if (equipment != null)
+        {
+            RenderInformation();
+            Subscribe();
+        }
+    }
+    private void OnDisable()
+    {
+        if (equipment != null)
+        {
+            UnSubscribe();
+        }
+    }
+    private void RenderInformation()
+    {
         improvementPanel.Init(equipment);
 
         if (equipment != null)
@@ -39,20 +78,21 @@ public class EquipmentCell : ItemCell
                 {
                     ownerPanel.gameObject.SetActive(false);
                 }
-                equipment.changedOwnerEvent += UpdateOwnerImage;
             }
         }
     }
-    private void UpdateOwnerImage()
+    private void Subscribe()
     {
-        if (equipment.Owner == null)
+        if (ownerPanel != null)
         {
-            ownerPanel.gameObject.SetActive(false);
+            equipment.changedOwnerEvent += UpdateOwnerImage;
         }
-        else
+    }
+    private void UnSubscribe()
+    {
+        if (ownerPanel != null)
         {
-            ownerPanel.gameObject.SetActive(true);
-            ownerImage.sprite = equipment.Owner.CharacterData.SpriteCharacter;
+            equipment.changedOwnerEvent -= UpdateOwnerImage;
         }
     }
     private void OnDestroy()
@@ -60,6 +100,7 @@ public class EquipmentCell : ItemCell
         if (equipment != null)
         {
             equipment.changedOwnerEvent -= UpdateOwnerImage;
+            Debug.Log("EquipmentCellUnsubscribe");
         }
     }
 }

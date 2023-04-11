@@ -72,4 +72,13 @@ public class EquipmentDescription : MonoBehaviour
     {
         upgradeMenu.OpenUpgradePanel(equipment, TypeImpoveEquipment.Improve);
     }
+    private void OnDestroy()
+    {
+        if (equipment != null)
+        {
+            equipment.improvedStatsEvent -= RenderPerkPanel;
+
+            equipment.improvedStatsEvent -= RenderStatPanel;
+        }
+    }
 }
